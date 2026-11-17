@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TODAY DEVELOPMENT CO., LTD. | Technology. Innovation. Impact.</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Kanit:wght@500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      /* Official Corporate Colors */
+      --brand-primary: #4F4F4F;
+      --brand-accent: #FF4F18;
+
+      /* Background System */
+      --bg-primary: #151515;
+      --bg-secondary: #242424;
+      --bg-card: #303030;
+      --bg-elevated: #3A3A3A;
+
+      /* Typography */
+      --text-primary: #F5F5F5;
+      --text-secondary: #B8B8B8;
+      --text-muted: #909090;
+
+      /* Borders */
+      --border-primary: #4F4F4F;
+
+      /* Interactive States */
+      --accent-hover: #FF7043;
+      --accent-glow: rgba(255, 79, 24, 0.18);
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: 'Inter', 'IBM Plex Sans Thai', sans-serif;
+      overflow-x: hidden;
+    }
+
+    .font-display {
+      font-family: 'Bebas Neue', 'Space Grotesk', 'Kanit', sans-serif;
+    }
+
+    .font-heading {
+      font-family: 'Space Grotesk', 'Kanit', sans-serif;
+    }
+
+    /* Smooth Smoked-Titanium Logo Plinth (ไม่ขาวจ้า กลมกลืนกับธีมมืด) */
+    .logo-plinth {
+      background: linear-gradient(135deg, rgba(190, 192, 198, 0.86) 0%, rgba(152, 155, 162, 0.78) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-left: 3px solid var(--brand-accent);
+      border-radius: 4px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(8px);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+
+    .logo-plinth:hover {
+      transform: translateY(-1px);
+      border-color: var(--brand-accent);
+      box-shadow: 0 8px 24px rgba(255, 79, 24, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    }
+
+    /* Cinematic Hero Lighting & Subtle Grid */
+    .hero-surface {
+      background:
+        radial-gradient(circle at 75% 35%, rgba(255, 79, 24, 0.14), transparent 45%),
+        radial-gradient(circle at 20% 80%, rgba(79, 79, 79, 0.18), transparent 50%),
+        linear-gradient(180deg, #151515 0%, #1A1A1A 100%);
+    }
+
+    .tech-grid-bg {
+      background-size: 48px 48px;
+      background-image:
+        linear-gradient(to right, rgba(79, 79, 79, 0.14) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(79, 79, 79, 0.14) 1px, transparent 1px);
+    }
+
+    .hero-headline {
+      font-size: clamp(4.25rem, 10vw, 8.5rem);
+      line-height: 0.88;
+      letter-spacing: 0.01em;
+    }
+
+    .section-headline {
+      font-size: clamp(2.5rem, 5vw, 4.25rem);
+      line-height: 0.95;
+    }
+
+    /* Corporate Card System */
+    .corp-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-primary);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.35s ease,
+                  box-shadow 0.35s ease,
+                  background-color 0.35s ease;
+    }
+
+    .corp-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--brand-accent);
+      box-shadow: 0 16px 36px -12px var(--accent-glow);
+      background-color: var(--bg-elevated);
+    }
+
+    /* Netflix-Style Horizontal Feed Track */
+    .netflix-track {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .netflix-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Buttons */
+    .btn-primary {
+      background-color: var(--brand-accent);
+      color: #FFFFFF;
+      transition: background-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--accent-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px var(--accent-glow);
+    }
+
+    .btn-secondary {
+      background-color: rgba(36, 36, 36, 0.8);
+      border: 1px solid var(--border-primary);
+      color: var(--text-primary);
+      transition: border-color 0.25s ease, color 0.25s ease, background-color 0.25s ease;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--brand-accent);
+      color: #FFFFFF;
+      background-color: var(--bg-card);
+    }
+
+    /* Navigation Indicator */
+    .nav-link {
+      position: relative;
+      color: var(--text-secondary);
+      transition: color 0.25s ease;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 0;
+      height: 2px;
+      background-color: var(--brand-accent);
+      transition: width 0.25s ease;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--text-primary);
+    }
+
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      width: 100%;
+    }
+
+    /* Scroll Reveal Animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+      .corp-card,
+      .btn-primary,
+      .btn-secondary,
+      .logo-plinth {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-[#FF4F18] selection:text-white">
+
+  <!-- ============================================================================
+       NAVIGATION BAR
+       ============================================================================ -->
+  <header class="sticky top-0 z-50 bg-[#151515]/95 backdrop-blur-md border-b border-[#4F4F4F]/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-24 flex items-center justify-between gap-4">
+      <!-- Brand Identity with Smoother Smoked-Titanium Logo Badge -->
+      <a href="#" class="flex items-center gap-3.5 focus:outline-none">
+        <div class="logo-plinth px-3.5 py-2 flex items-center justify-center">
+          <img
+            id="uiLogoImg"
+            src="./logo.png"
+            alt="TODAY DEVELOPMENT CO., LTD."
+            class="h-8 sm:h-10 w-auto object-contain block"
+          />
+        </div>
+        <div class="hidden xl:block">
+          <span id="uiBrandNameHeader" class="font-heading font-bold text-sm tracking-wider text-[#F5F5F5] block uppercase">
+            TODAY DEVELOPMENT CO., LTD.
+          </span>
+          <span class="text-[11px] font-heading tracking-widest text-[#FF4F18] uppercase block">
+            CORPORATE TECHNOLOGY &amp; SOLUTIONS
+          </span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex items-center gap-8 text-xs font-heading font-semibold tracking-widest uppercase">
+        <a href="#expertise" class="nav-link active">ABOUT</a>
+        <a href="#catalog" class="nav-link">SOLUTIONS</a>
+        <a href="#insights" class="nav-link">INSIGHTS</a>
+        <a href="#vision" class="nav-link">STANDARD</a>
+        <a href="#contact" class="nav-link">CONTACT</a>
+      </nav>
+
+      <!-- Desktop CTA Action -->
+      <div class="hidden md:flex items-center">
+        <a
+          href="#contact"
+          id="uiNavCta"
+          class="btn-primary px-6 py-3 text-xs font-heading font-bold uppercase tracking-widest inline-flex items-center gap-2"
+        >
+          <span>CONTACT US</span>
+        </a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button
+        id="mobileMenuBtn"
+        type="button"
+        aria-label="เปิดเมนูนำทาง"
+        aria-expanded="false"
+        class="md:hidden p-2.5 border border-[#4F4F4F] bg-[#242424] text-[#F5F5F5] hover:border-[#FF4F18] transition"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="square" d="M4 7h16M4 12h16M4 17h10" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobileMenu" class="hidden md:hidden bg-[#242424] border-b border-[#4F4F4F] px-4 pt-3 pb-6 space-y-3">
+      <a href="#expertise" class="block py-2 text-xs font-heading font-semibold tracking-widest uppercase text-[#F5F5F5] border-b border-[#4F4F4F]/40">01 / ABOUT &amp; EXPERTISE</a>
+      <a href="#catalog" class="block py-2 text-xs font-heading font-semibold tracking-widest uppercase text-[#F5F5F5] border-b border-[#4F4F4F]/40">02 / FEATURED CATALOG</a>
+      <a href="#insights" class="block py-2 text-xs font-heading font-semibold tracking-widest uppercase text-[#F5F5F5] border-b border-[#4F4F4F]/40">03 / INSIGHTS &amp; UPDATES</a>
+      <a href="#vision" class="block py-2 text-xs font-heading font-semibold tracking-widest uppercase text-[#F5F5F5] border-b border-[#4F4F4F]/40">04 / CORPORATE STANDARD</a>
+      <a href="#contact" class="block py-2 text-xs font-heading font-semibold tracking-widest uppercase text-[#F5F5F5] border-b border-[#4F4F4F]/40">05 / CONTACT US</a>
+      <div class="pt-2">
+        <a href="#contact" class="btn-primary block text-center py-3 text-xs font-heading font-bold uppercase tracking-widest">CONTACT US</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================================
+       CINEMATIC HERO SECTION
+       ============================================================================ -->
+  <section class="relative hero-surface tech-grid-bg border-b border-[#4F4F4F] overflow-hidden">
+    <svg class="hidden lg:block absolute inset-0 w-full h-full pointer-events-none" preserveAspectRatio="none" viewBox="0 0 1440 760" fill="none">
+      <polyline points="680,0 520,250 520,490 390,760" stroke="#FF4F18" stroke-width="1.5" stroke-opacity="0.65" />
+      <polyline points="696,0 536,250 536,490 406,760" stroke="#4F4F4F" stroke-width="1" stroke-opacity="0.45" />
+    </svg>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-24 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+
+        <!-- Left Column: Oversized Editorial Headline -->
+        <div class="lg:col-span-6 space-y-6 reveal is-visible">
+          <div class="inline-flex items-center gap-3 px-3.5 py-1.5 bg-[#242424] border border-[#4F4F4F]">
+            <span class="w-2 h-2 bg-[#FF4F18]"></span>
+            <span id="uiHeroBadge" class="font-heading text-xs uppercase tracking-widest text-[#B8B8B8]">TODAY DEVELOPMENT CO., LTD.</span>
+          </div>
+
+          <h1 class="font-display uppercase tracking-tight select-none hero-headline">
+            <span id="uiHeroTitle1" class="block text-[#F5F5F5]">BUILD</span>
+            <span id="uiHeroTitle2" class="block text-[#F5F5F5]">WHAT’S</span>
+            <span id="uiHeroTitle3" class="block text-[#FF4F18]">NEXT.</span>
+          </h1>
+
+          <p class="text-base sm:text-lg text-[#B8B8B8] max-w-xl font-normal leading-relaxed">
+            <span id="uiHeroSubtitleEn" class="text-[#F5F5F5] font-medium">Technology. Innovation. Impact.</span>
+            <span id="uiHeroSubtitleTh">ยกระดับองค์กรด้วยระบบนิเวศเทคโนโลยีอัจฉริยะ โซลูชันอุตสาหกรรม และแคตตาล็อกผลิตภัณฑ์มาตรฐานระดับสากล</span>
+          </p>
+
+          <div class="pt-2 flex flex-wrap items-center gap-4">
+            <a
+              href="#catalog"
+              class="btn-primary px-7 py-4 text-xs sm:text-sm font-heading font-bold uppercase tracking-widest inline-flex items-center gap-3 group"
+            >
+              <span id="uiHeroBtnText">EXPLORE SOLUTIONS</span>
+              <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                <path stroke-linecap="square" d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+            </a>
+            <a
+              href="#insights"
+              class="btn-secondary px-6 py-4 text-xs sm:text-sm font-heading font-semibold uppercase tracking-widest"
+            >
+              LATEST INSIGHTS &rarr;
+            </a>
+          </div>
+        </div>
+
+        <!-- Right Column: Cinematic Industrial Visual Showcase -->
+        <div class="lg:col-span-6 reveal is-visible">
+          <div class="relative bg-[#242424] border border-[#4F4F4F] p-2 sm:p-3 shadow-2xl group">
+            <div class="absolute -top-1 -left-1 w-4 h-4 border-t-2 border-l-2 border-[#FF4F18] z-20"></div>
+            <div class="absolute -bottom-1 -right-1 w-4 h-4 border-b-2 border-r-2 border-[#FF4F18] z-20"></div>
+
+            <div class="relative overflow-hidden bg-[#151515] aspect-[16/11]">
+              <img
+                id="uiHeroImage"
+                src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1400&q=85"
+                alt="TODAY DEVELOPMENT CO., LTD. Engineering"
+                class="w-full h-full object-cover object-center brightness-90 contrast-110 transition-transform duration-700 group-hover:scale-105"
+              />
+              <div class="absolute inset-0 bg-gradient-to-tr from-[#151515] via-transparent to-[#FF4F18]/15"></div>
+              <div class="absolute bottom-0 inset-x-0 h-1 bg-gradient-to-r from-[#FF4F18] via-[#FF4F18]/60 to-transparent"></div>
+
+              <div class="absolute bottom-4 left-4 right-4 sm:right-auto bg-[#151515]/90 backdrop-blur-md border border-[#4F4F4F] px-4 py-3 flex items-center gap-4">
+                <div class="w-2.5 h-2.5 bg-[#FF4F18] animate-pulse"></div>
+                <div>
+                  <div class="text-[11px] font-heading uppercase tracking-widest text-[#909090]">LIVE DATABASE STATUS</div>
+                  <div id="heroItemCount" class="text-xs sm:text-sm font-heading font-bold text-[#F5F5F5]">CONNECTED TO SUPABASE CLOUD</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================================
+       SECTION 01: WHAT WE DO / OUR EXPERTISE
+       ============================================================================ -->
+  <section id="expertise" class="bg-[#151515] border-b border-[#4F4F4F] py-16 lg:py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+
+        <!-- Section Title Column -->
+        <div class="lg:col-span-4 space-y-4 reveal">
+          <div class="flex items-center gap-4">
+            <span id="uiSec1Label" class="font-heading text-xs font-bold tracking-widest uppercase text-[#FF4F18]">01 / WHAT WE DO</span>
+            <span class="flex-1 h-[1px] bg-[#FF4F18]/60 max-w-[120px]"></span>
+          </div>
+          <h2 id="uiSec1Title" class="font-display uppercase text-[#F5F5F5] section-headline tracking-tight">
+            OUR EXPERTISE
+          </h2>
+          <p id="uiSec1Desc" class="text-sm text-[#B8B8B8] leading-relaxed">
+            ผสานวิศวกรรมข้อมูล ระบบอัตโนมัติ และการออกแบบผลิตภัณฑ์ระดับพรีเมียม เพื่อสร้างความได้เปรียบทางการแข่งขันให้แก่องค์กรยุคใหม่
+          </p>
+        </div>
+
+        <!-- 3 Capability Pillars -->
+        <div class="lg:col-span-8 grid grid-cols-1 md:grid-cols-3 gap-5">
+          <!-- Pillar 1 -->
+          <div class="corp-card p-6 flex flex-col justify-between reveal">
+            <div>
+              <div class="w-10 h-10 mb-5 flex items-center justify-center text-[#FF4F18]">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
+                  <rect x="7" y="7" width="10" height="10" />
+                  <path d="M9 3v4M15 3v4M9 17v4M15 17v4M3 9h4M3 15h4M17 9h4M17 15h4" />
+                </svg>
+              </div>
+              <h3 id="uiPillar1Title" class="font-heading font-bold text-base uppercase tracking-wider text-[#F5F5F5] mb-2">
+                AI &amp; AUTOMATION
+              </h3>
+              <p id="uiPillar1Desc" class="text-xs sm:text-sm text-[#B8B8B8] leading-relaxed">
+                Intelligent systems that increase productivity and unlock new value.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-[#4F4F4F]/60 flex items-center justify-between text-[11px] font-heading text-[#909090]">
+              <span>SYS.01</span>
+              <span class="text-[#FF4F18]">&rarr;</span>
+            </div>
+          </div>
+
+          <!-- Pillar 2 -->
+          <div class="corp-card p-6 flex flex-col justify-between reveal">
+            <div>
+              <div class="w-10 h-10 mb-5 flex items-center justify-center text-[#FF4F18]">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
+                  <polygon points="12 3 21 8 12 13 3 8 12 3" />
+                  <polyline points="3 12 12 17 21 12" />
+                  <polyline points="3 16 12 21 21 16" />
+                </svg>
+              </div>
+              <h3 id="uiPillar2Title" class="font-heading font-bold text-base uppercase tracking-wider text-[#F5F5F5] mb-2">
+                INTELLIGENT PRODUCTS
+              </h3>
+              <p id="uiPillar2Desc" class="text-xs sm:text-sm text-[#B8B8B8] leading-relaxed">
+                Connected, data-driven products for a smarter, more efficient world.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-[#4F4F4F]/60 flex items-center justify-between text-[11px] font-heading text-[#909090]">
+              <span>SYS.02</span>
+              <span class="text-[#FF4F18]">&rarr;</span>
+            </div>
+          </div>
+
+          <!-- Pillar 3 -->
+          <div class="corp-card p-6 flex flex-col justify-between reveal">
+            <div>
+              <div class="w-10 h-10 mb-5 flex items-center justify-center text-[#FF4F18]">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
+                  <path d="M3 21h18V9l-6 4V9l-6 4V4H3v17z" />
+                </svg>
+              </div>
+              <h3 id="uiPillar3Title" class="font-heading font-bold text-base uppercase tracking-wider text-[#F5F5F5] mb-2">
+                INDUSTRY SOLUTIONS
+              </h3>
+              <p id="uiPillar3Desc" class="text-xs sm:text-sm text-[#B8B8B8] leading-relaxed">
+                Tailored technology for real business and operational impact.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-[#4F4F4F]/60 flex items-center justify-between text-[11px] font-heading text-[#909090]">
+              <span>SYS.03</span>
+              <span class="text-[#FF4F18]">&rarr;</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================================
+       SECTION 02: FEATURED CATALOG (กด SPEC เพื่อไปหน้า spec.html โชว์สเปคเด่นๆ)
+       ============================================================================ -->
+  <main id="catalog" class="bg-[#242424] border-b border-[#4F4F4F] py-16 lg:py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Section Header & Search/Filter Controls -->
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 pb-10 border-b border-[#4F4F4F] reveal">
+        <div class="space-y-3">
+          <div class="flex items-center gap-4">
+            <span id="uiSec2Label" class="font-heading text-xs font-bold tracking-widest uppercase text-[#FF4F18]">02 / SOLUTIONS &amp; INVENTORY</span>
+            <span class="w-16 h-[1px] bg-[#FF4F18]"></span>
+          </div>
+          <h2 class="font-display uppercase text-[#F5F5F5] section-headline">
+            <span id="uiSec2TitleWhite">FEATURED</span> <span id="uiSec2TitleOrange" class="text-[#FF4F18]">CATALOG.</span>
+          </h2>
+          <p id="uiSec2Desc" class="text-sm text-[#B8B8B8]">
+            คลิกที่ปุ่ม <span class="text-[#FF4F18] font-semibold">SPEC &rarr;</span> ในแต่ละการ์ดเพื่อเปิดดูหน้าใบสเปคเชิงลึก (Technical Specification Sheet)
+          </p>
+        </div>
+
+        <!-- Search & Category Filter Bar -->
+        <div class="w-full lg:w-auto flex flex-col sm:flex-row gap-3">
+          <div class="relative sm:w-80">
+            <input
+              id="searchInput"
+              type="search"
+              placeholder="ค้นหาชื่อเรื่อง หรือรายละเอียด..."
+              class="w-full bg-[#151515] border border-[#4F4F4F] px-4 py-3 text-sm text-[#F5F5F5] placeholder-[#909090] focus:border-[#FF4F18] focus:outline-none transition"
+            />
+          </div>
+          <select
+            id="tagFilter"
+            aria-label="กรองตามหมวดหมู่หรือราคา"
+            class="sm:w-60 bg-[#151515] border border-[#4F4F4F] px-4 py-3 text-sm text-[#F5F5F5] focus:border-[#FF4F18] focus:outline-none transition"
+          >
+            <option value="">ทั้งหมด (ทุกหมวดหมู่/ราคา)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Status Message -->
+      <div id="statusMessage" class="my-12 p-12 bg-[#151515] border border-[#4F4F4F] text-center text-[#B8B8B8] font-heading tracking-wide">
+        กำลังโหลดข้อมูล...
+      </div>
+
+      <!-- Dynamic Items Grid -->
+      <div id="itemsGrid" class="pt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 hidden"></div>
+
+    </div>
+  </main>
+
+  <!-- ============================================================================
+       SECTION 03: NETFLIX-STYLE ARTICLES & ACTIVITY FEED (เลื่อนซ้าย-ขวา & สไลด์ออโต้)
+       ============================================================================ -->
+  <section id="insights" class="bg-[#151515] border-b border-[#4F4F4F] py-16 lg:py-24 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+
+      <!-- Header + Feed Controls -->
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 reveal">
+        <div class="space-y-3">
+          <div class="flex items-center gap-3">
+            <span class="w-2.5 h-2.5 bg-[#FF4F18] animate-ping"></span>
+            <span class="font-heading text-xs font-bold tracking-widest uppercase text-[#FF4F18]">03 / LIVE INSIGHTS &amp; ACTIVITY STREAM</span>
+          </div>
+          <h2 class="font-display uppercase text-[#F5F5F5] section-headline">
+            LATEST <span class="text-[#FF4F18]">UPDATES &amp; ARTICLES.</span>
+          </h2>
+          <p class="text-sm text-[#B8B8B8]">
+            อัปเดตข่าวสาร โครงการ และบทความล่าสุด — เลื่อนดูซ้าย-ขวา หรือรับชมสไลด์แนะนำอัตโนมัติ
+          </p>
+        </div>
+
+        <!-- Status Indicator -->
+        <div class="flex items-center gap-3 self-start sm:self-end">
+          <span id="autoPlayStatusBadge" class="text-[11px] font-heading uppercase tracking-widest text-[#909090] px-3 py-2 bg-[#242424] border border-[#4F4F4F]">
+            AUTO-SLIDE: ON
+          </span>
+        </div>
+      </div>
+
+      <!-- Featured Spotlight Billboard (สไตล์ฟีตแนะนำ Netflix ด้านบนสุดของหมวดบทความ) -->
+      <div id="featuredBillboard" class="relative bg-[#242424] border border-[#4F4F4F] overflow-hidden shadow-2xl reveal"></div>
+
+      <!-- Horizontal Sliding Cards Row พร้อมปุ่มลูกศรซ้าย-ขวาขนาบข้างแถวการ์ดตามภาพตัวอย่าง -->
+      <div class="relative">
+        <!-- ปุ่มลูกศรเลื่อนซ้าย (ขนาบข้างซ้ายของแถวการ์ด) -->
+        <button
+          id="feedPrevBtn"
+          type="button"
+          aria-label="เลื่อนแถวการ์ดไปทางซ้าย"
+          class="absolute -left-2 sm:-left-5 lg:-left-7 top-1/2 -translate-y-1/2 z-30 w-11 h-20 sm:w-12 sm:h-24 bg-[#151515]/90 hover:bg-[#FF4F18] border border-[#4F4F4F] hover:border-[#FF4F18] text-[#F5F5F5] hover:text-white flex items-center justify-center shadow-[0_0_25px_rgba(0,0,0,0.85)] transition duration-200 group"
+        >
+          <svg class="w-7 h-7 sm:w-8 sm:h-8 transition-transform duration-200 group-hover:-translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="square" stroke-linejoin="miter" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+
+        <!-- แถวการ์ดบทความ -->
+        <div
+          id="postsTrack"
+          class="netflix-track flex gap-6 overflow-x-auto scroll-smooth pb-4 pt-1 px-2 select-none"
+        ></div>
+
+        <!-- ปุ่มลูกศรเลื่อนขวา (ขนาบข้างขวาของแถวการ์ด) -->
+        <button
+          id="feedNextBtn"
+          type="button"
+          aria-label="เลื่อนแถวการ์ดไปทางขวา"
+          class="absolute -right-2 sm:-right-5 lg:-right-7 top-1/2 -translate-y-1/2 z-30 w-11 h-20 sm:w-12 sm:h-24 bg-[#151515]/90 hover:bg-[#FF4F18] border border-[#4F4F4F] hover:border-[#FF4F18] text-[#F5F5F5] hover:text-white flex items-center justify-center shadow-[0_0_25px_rgba(0,0,0,0.85)] transition duration-200 group"
+        >
+          <svg class="w-7 h-7 sm:w-8 sm:h-8 transition-transform duration-200 group-hover:translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="square" stroke-linejoin="miter" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================================
+       SECTION 04: STATEMENT & SPLIT EDITORIAL SECTION
+       ============================================================================ -->
+  <section id="vision" class="bg-[#242424] border-b border-[#4F4F4F] py-16 lg:py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+
+        <div class="lg:col-span-7 space-y-6 reveal">
+          <div class="flex items-center gap-4">
+            <span id="uiSec3Label" class="font-heading text-xs font-bold tracking-widest uppercase text-[#FF4F18]">04 / CORPORATE STANDARD</span>
+            <span class="w-16 h-[1px] bg-[#FF4F18]"></span>
+          </div>
+          <h2 class="font-display uppercase section-headline text-[#F5F5F5]">
+            <span id="uiSec3Title1">INNOVATION.</span><br />
+            <span id="uiSec3Title2" class="text-[#FF4F18]">BEYOND LIMITS.</span>
+          </h2>
+          <p id="uiSec3Desc" class="text-sm sm:text-base text-[#B8B8B8] leading-relaxed max-w-2xl">
+            สถาปัตยกรรมระบบที่ออกแบบมาเพื่อความเสถียรสูงสุด รองรับการจัดการข้อมูลแบบไร้รอยต่อ พร้อมมาตรฐานความปลอดภัยระดับองค์กร (Row-Level Security) และการประมวลผลผ่านเครือข่ายคลาวด์ความเร็วสูง
+          </p>
+
+          <div class="grid grid-cols-3 gap-4 pt-4 border-t border-[#4F4F4F]">
+            <div>
+              <div id="uiStat1Val" class="font-display text-3xl sm:text-4xl text-[#FF4F18]">99.9%</div>
+              <div id="uiStat1Label" class="text-xs font-heading uppercase tracking-wider text-[#909090] mt-1">SYSTEM RELIABILITY</div>
+            </div>
+            <div>
+              <div id="uiStat2Val" class="font-display text-3xl sm:text-4xl text-[#F5F5F5]">RLS</div>
+              <div id="uiStat2Label" class="text-xs font-heading uppercase tracking-wider text-[#909090] mt-1">ENTERPRISE SECURITY</div>
+            </div>
+            <div>
+              <div id="uiStat3Val" class="font-display text-3xl sm:text-4xl text-[#FF4F18]">24/7</div>
+              <div id="uiStat3Label" class="text-xs font-heading uppercase tracking-wider text-[#909090] mt-1">REALTIME CLOUD SYNC</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5 reveal">
+          <div class="bg-[#303030] border border-[#4F4F4F] p-6 sm:p-8 space-y-5 relative">
+            <div class="w-10 h-1 bg-[#FF4F18]"></div>
+            <h3 id="uiSec3BoxTitle" class="font-heading font-bold text-xl uppercase text-[#F5F5F5]">
+              ENGINEERING EXCELLENCE &amp; IMPACT
+            </h3>
+            <p id="uiSec3BoxDesc" class="text-sm text-[#B8B8B8] leading-relaxed">
+              มุ่งมั่นพัฒนาเทคโนโลยีและโซลูชันที่ตอบโจทย์ภาคธุรกิจและอุตสาหกรรมอย่างครบวงจร พร้อมทีมผู้เชี่ยวชาญคอยให้คำปรึกษาและดูแลระบบ
+            </p>
+            <div class="pt-2">
+              <a
+                href="#contact"
+                class="btn-primary w-full py-3.5 px-6 text-xs font-heading font-bold uppercase tracking-widest inline-flex items-center justify-center gap-2"
+              >
+                <span>CONTACT HEAD OFFICE</span>
+                <span>&rarr;</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================================
+       SECTION 05: HEAD OFFICE & CONTACT INFORMATION + FOOTER
+       ============================================================================ -->
+  <footer id="contact" class="bg-[#151515] text-[#B8B8B8] pt-16 pb-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 pb-12 border-b border-[#4F4F4F]">
+        <!-- Brand & Logo Column -->
+        <div class="lg:col-span-5 space-y-5">
+          <div class="inline-flex items-center">
+            <div class="logo-plinth px-3.5 py-2">
+              <img
+                id="uiFooterLogoImg"
+                src="./logo.png"
+                alt="TODAY DEVELOPMENT CO., LTD."
+                class="h-9 w-auto object-contain block"
+              />
+            </div>
+          </div>
+          <div>
+            <h3 id="uiContactOfficeName" class="font-heading font-bold text-lg text-[#F5F5F5] uppercase tracking-wide">
+              TODAY DEVELOPMENT CO., LTD. (HEAD OFFICE)
+            </h3>
+            <p class="text-xs font-heading uppercase tracking-widest text-[#FF4F18] mt-1">
+              OFFICIAL CORPORATE HEADQUARTERS
+            </p>
+          </div>
+        </div>
+
+        <!-- Contact Details Column -->
+        <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <!-- Address & Tax ID -->
+          <div class="bg-[#242424] border border-[#4F4F4F] p-5 space-y-3">
+            <div class="text-xs font-heading font-bold uppercase tracking-widest text-[#FF4F18]">
+              ADDRESS
+            </div>
+            <p id="uiContactAddress" class="text-sm text-[#F5F5F5] leading-relaxed">
+              11/6 Pracha Songkhro Road, Bang Nak Subdistrict, Mueang Narathiwat District, Narathiwat Province 96000, Thailand
+            </p>
+            <div class="pt-3 border-t border-[#4F4F4F]/60">
+              <span class="text-xs font-heading uppercase tracking-wider text-[#909090] block">TAX IDENTIFICATION NUMBER</span>
+              <span id="uiContactTaxId" class="font-heading font-bold text-sm text-[#F5F5F5] tracking-wider">0965565000183</span>
+            </div>
+          </div>
+
+          <!-- Tel / LINE -->
+          <div class="bg-[#242424] border border-[#4F4F4F] p-5 flex flex-col justify-center space-y-3">
+            <div class="text-xs font-heading font-bold uppercase tracking-widest text-[#FF4F18]">
+              TEL. / LINE
+            </div>
+            <p id="uiContactPhoneLine" class="font-heading font-bold text-base sm:text-lg text-[#F5F5F5] leading-relaxed">
+              094 898 6910 / 065 956 5019 / 099 265 2569
+            </p>
+            <p class="text-xs text-[#909090]">
+              เวลาทำการ: จันทร์ - เสาร์ | ติดต่อสอบถามข้อมูลผลิตภัณฑ์และโซลูชันได้โดยตรง
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Copyright & Links -->
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-heading uppercase tracking-wider text-[#909090]">
+        <div>
+          &copy; <span id="currentYear">2026</span> <span id="uiFooterCopyName">TODAY DEVELOPMENT CO., LTD.</span> ALL RIGHTS RESERVED.
+        </div>
+        <div class="flex flex-wrap items-center gap-6">
+          <a href="#expertise" class="hover:text-[#FF4F18] transition">ABOUT</a>
+          <a href="#catalog" class="hover:text-[#FF4F18] transition">SOLUTIONS</a>
+          <a href="#insights" class="hover:text-[#FF4F18] transition">INSIGHTS</a>
+          <a href="#vision" class="hover:text-[#FF4F18] transition">STANDARD</a>
+          <a href="./admin.html" class="text-[#F5F5F5] hover:text-[#FF4F18] transition">ADMIN CONSOLE</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ============================================================================
+       ARTICLE READER MODAL (เปิดอ่านบทความเต็มพร้อมแกลเลอรีเลื่อนซ้าย-ขวา)
+       ============================================================================ -->
+  <div id="articleModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-[#242424] border-2 border-[#4F4F4F] max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+      <div class="sticky top-0 z-20 bg-[#151515] border-b border-[#4F4F4F] px-6 py-4 flex items-center justify-between">
+        <span id="modalPostTag" class="text-xs font-heading font-bold uppercase tracking-widest text-[#FF4F18]">INSIGHT</span>
+        <button id="closeArticleModalBtn" type="button" class="text-xs font-heading font-bold uppercase tracking-wider text-[#B8B8B8] hover:text-[#FF4F18]">
+          [ ปิดหน้าต่าง X ]
+        </button>
+      </div>
+      <!-- รูปภาพบนหัวก่อนบทความใน Modal -->
+      <div id="modalCarouselContainer" class="relative aspect-[16/9] bg-[#151515] border-b border-[#4F4F4F] overflow-hidden"></div>
+      <div class="p-6 sm:p-8 space-y-4">
+        <div id="modalPostDate" class="text-xs font-heading uppercase tracking-wider text-[#909090]"></div>
+        <h3 id="modalPostTitle" class="font-heading font-bold text-xl sm:text-2xl text-[#F5F5F5] leading-snug"></h3>
+        <p id="modalPostContent" class="text-sm sm:text-base text-[#B8B8B8] whitespace-pre-line leading-relaxed"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================================
+       SUPABASE & APPLICATION SCRIPT
+       ============================================================================ -->
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+    import {
+      SITE_CONFIG_TAG,
+      POST_ITEM_TAG,
+      DEMO_CATALOG_ITEMS,
+      DEMO_POSTS,
+      parseCatalogItem,
+      parsePostItem
+    } from './shared-data.js';
+
+    // ============================================================================
+    // ตั้งค่า SUPABASE ของคุณที่นี่
+    // วิธีนำค่ามาใส่: เข้า Supabase Dashboard -> Project Settings -> API
+    // คัดลอก Project URL และ Project API Keys (anon, public) มาวางด้านล่าง
+    // ============================================================================
+    const SUPABASE_URL = 'https://trdszzbeqbdewfwdliib.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_LP6b8aVDzAluIL5KVf8aFg_1qoNhwr1';
+
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    const searchInput = document.getElementById('searchInput');
+    const tagFilter = document.getElementById('tagFilter');
+    const statusMessage = document.getElementById('statusMessage');
+    const itemsGrid = document.getElementById('itemsGrid');
+    const heroItemCount = document.getElementById('heroItemCount');
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    const featuredBillboard = document.getElementById('featuredBillboard');
+    const postsTrack = document.getElementById('postsTrack');
+    const feedPrevBtn = document.getElementById('feedPrevBtn');
+    const feedNextBtn = document.getElementById('feedNextBtn');
+    const autoPlayStatusBadge = document.getElementById('autoPlayStatusBadge');
+
+    const articleModal = document.getElementById('articleModal');
+    const closeArticleModalBtn = document.getElementById('closeArticleModalBtn');
+    const modalPostTag = document.getElementById('modalPostTag');
+    const modalPostDate = document.getElementById('modalPostDate');
+    const modalPostTitle = document.getElementById('modalPostTitle');
+    const modalPostContent = document.getElementById('modalPostContent');
+    const modalCarouselContainer = document.getElementById('modalCarouselContainer');
+
+    let allItems = [];
+    let allPosts = [];
+    let billboardIdx = 0;
+    let billboardImgIdx = 0;
+    let isFeedPaused = false;
+
+    // Mobile Menu Toggle
+    mobileMenuBtn?.addEventListener('click', () => {
+      const isHidden = mobileMenu.classList.toggle('hidden');
+      mobileMenuBtn.setAttribute('aria-expanded', String(!isHidden));
+    });
+
+    // Scroll Reveal Observer
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    function escapeHtml(str) {
+      const div = document.createElement('div');
+      div.textContent = str ?? '';
+      return div.innerHTML;
+    }
+
+    function formatThaiDate(dateStr) {
+      if (!dateStr) return '';
+      const d = new Date(dateStr);
+      if (Number.isNaN(d.getTime())) return String(dateStr);
+      return d.toLocaleDateString('th-TH', { year: 'numeric', month: 'short', day: 'numeric' });
+    }
+
+    function setText(id, val) {
+      const el = document.getElementById(id);
+      if (el && val !== undefined && val !== null && String(val).trim() !== '') {
+        el.textContent = val;
+      }
+    }
+
+    // นำค่าที่ตั้งจากหลังบ้าน (Site Config) มาอัปเดตทุกส่วนของหน้าเว็บ
+    function applySiteConfig(cfg) {
+      if (!cfg || typeof cfg !== 'object') return;
+
+      if (cfg.logoUrl) {
+        const headerLogo = document.getElementById('uiLogoImg');
+        const footerLogo = document.getElementById('uiFooterLogoImg');
+        if (headerLogo) headerLogo.src = cfg.logoUrl;
+        if (footerLogo) footerLogo.src = cfg.logoUrl;
+      }
+
+      if (cfg.companyName) {
+        setText('uiBrandNameHeader', cfg.companyName);
+        setText('uiFooterCopyName', cfg.companyName);
+        document.title = `${cfg.companyName} | Technology. Innovation. Impact.`;
+      }
+
+      setText('uiNavCta', cfg.navCtaText);
+      setText('uiHeroBadge', cfg.heroBadge);
+      setText('uiHeroTitle1', cfg.heroTitle1);
+      setText('uiHeroTitle2', cfg.heroTitle2);
+      setText('uiHeroTitle3', cfg.heroTitle3);
+      setText('uiHeroSubtitleEn', cfg.heroSubtitleEn);
+      setText('uiHeroSubtitleTh', cfg.heroSubtitleTh);
+      setText('uiHeroBtnText', cfg.heroBtnText);
+
+      if (cfg.heroImageUrl) {
+        const heroImg = document.getElementById('uiHeroImage');
+        if (heroImg) heroImg.src = cfg.heroImageUrl;
+      }
+
+      setText('uiSec1Label', cfg.sec1Label);
+      setText('uiSec1Title', cfg.sec1Title);
+      setText('uiSec1Desc', cfg.sec1Desc);
+      setText('uiPillar1Title', cfg.pillar1Title);
+      setText('uiPillar1Desc', cfg.pillar1Desc);
+      setText('uiPillar2Title', cfg.pillar2Title);
+      setText('uiPillar2Desc', cfg.pillar2Desc);
+      setText('uiPillar3Title', cfg.pillar3Title);
+      setText('uiPillar3Desc', cfg.pillar3Desc);
+
+      setText('uiSec2Label', cfg.sec2Label);
+      setText('uiSec2TitleWhite', cfg.sec2TitleWhite);
+      setText('uiSec2TitleOrange', cfg.sec2TitleOrange);
+      setText('uiSec2Desc', cfg.sec2Desc);
+
+      setText('uiSec3Label', cfg.sec3Label);
+      setText('uiSec3Title1', cfg.sec3Title1);
+      setText('uiSec3Title2', cfg.sec3Title2);
+      setText('uiSec3Desc', cfg.sec3Desc);
+      setText('uiStat1Val', cfg.stat1Val);
+      setText('uiStat1Label', cfg.stat1Label);
+      setText('uiStat2Val', cfg.stat2Val);
+      setText('uiStat2Label', cfg.stat2Label);
+      setText('uiStat3Val', cfg.stat3Val);
+      setText('uiStat3Label', cfg.stat3Label);
+      setText('uiSec3BoxTitle', cfg.sec3BoxTitle);
+      setText('uiSec3BoxDesc', cfg.sec3BoxDesc);
+
+      setText('uiContactOfficeName', cfg.contactOfficeName);
+      setText('uiContactAddress', cfg.contactAddress);
+      setText('uiContactTaxId', cfg.contactTaxId);
+      setText('uiContactPhoneLine', cfg.contactPhoneLine);
+    }
+
+    function populateTags(items) {
+      const tags = [...new Set(items.map(i => (i.price_or_tag || '').trim()).filter(Boolean))];
+      tagFilter.innerHTML = '<option value="">ทั้งหมด (ทุกหมวดหมู่/ราคา)</option>' +
+        tags.map(t => `<option value="${escapeHtml(t)}">${escapeHtml(t)}</option>`).join('');
+    }
+
+    // ============================================================================
+    // RENDER FEATURED CATALOG (พร้อมปุ่ม SPEC -> พาไปหน้า spec.html)
+    // ============================================================================
+    function renderItems() {
+      const q = searchInput.value.trim().toLowerCase();
+      const selectedTag = tagFilter.value;
+
+      const filtered = allItems.filter(raw => {
+        const item = parseCatalogItem(raw);
+        const matchText = !q ||
+          (item.title || '').toLowerCase().includes(q) ||
+          (item.summary || '').toLowerCase().includes(q) ||
+          (item.price_or_tag || '').toLowerCase().includes(q);
+        const matchTag = !selectedTag || (item.price_or_tag || '').trim() === selectedTag;
+        return matchText && matchTag;
+      });
+
+      if (filtered.length === 0) {
+        itemsGrid.classList.add('hidden');
+        statusMessage.classList.remove('hidden');
+        statusMessage.textContent = 'ไม่พบรายการที่ค้นหา';
+        return;
+      }
+
+      statusMessage.classList.add('hidden');
+      itemsGrid.classList.remove('hidden');
+
+      itemsGrid.innerHTML = filtered.map((raw, idx) => {
+        const item = parseCatalogItem(raw);
+        const dateStr = formatThaiDate(item.created_at);
+        const indexNum = String(idx + 1).padStart(2, '0');
+        const specUrl = `./spec.html?id=${encodeURIComponent(item.id)}`;
+        const coverImg = item.gallery[0] || item.image_url;
+
+        const imgHtml = coverImg
+          ? `<a href="${specUrl}" class="block relative w-full h-56 overflow-hidden bg-[#151515] border-b border-[#4F4F4F]">
+               <img src="${escapeHtml(coverImg)}" alt="${escapeHtml(item.title)}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+               <div class="absolute inset-0 bg-gradient-to-t from-[#151515]/80 via-transparent to-transparent"></div>
+               <span class="absolute top-3 left-3 bg-[#151515]/90 border border-[#4F4F4F] px-2.5 py-1 text-[11px] font-heading font-bold text-[#909090]">#${indexNum}</span>
+             </a>`
+          : `<a href="${specUrl}" class="block relative w-full h-56 bg-[#151515] border-b border-[#4F4F4F] flex items-center justify-center text-[#909090] text-xs font-heading uppercase tracking-widest">
+               <span class="absolute top-3 left-3 bg-[#242424] border border-[#4F4F4F] px-2.5 py-1 text-[11px] font-heading font-bold text-[#909090]">#${indexNum}</span>
+               NO IMAGE PREVIEW
+             </a>`;
+
+        return `
+          <article class="corp-card group flex flex-col overflow-hidden">
+            ${imgHtml}
+            <div class="p-6 flex-1 flex flex-col">
+              <div class="flex items-start justify-between gap-3 mb-3">
+                <a href="${specUrl}" class="font-heading font-bold text-lg text-[#F5F5F5] group-hover:text-[#FF4F18] transition-colors leading-snug">
+                  ${escapeHtml(item.title)}
+                </a>
+                ${item.price_or_tag ? `<span class="shrink-0 bg-[#FF4F18]/15 border border-[#FF4F18] text-[#FF4F18] text-xs font-heading font-bold px-2.5 py-1 uppercase tracking-wider">${escapeHtml(item.price_or_tag)}</span>` : ''}
+              </div>
+              <p class="text-[#B8B8B8] text-sm line-clamp-3 flex-1 mb-6 leading-relaxed">${escapeHtml(item.summary)}</p>
+              <div class="pt-4 border-t border-[#4F4F4F]/60 flex items-center justify-between text-xs text-[#909090] mt-auto">
+                <time class="font-heading uppercase tracking-wider">${escapeHtml(dateStr)}</time>
+                <a
+                  href="${specUrl}"
+                  class="px-3.5 py-1.5 bg-[#FF4F18] hover:bg-[#FF7043] text-white inline-flex items-center gap-1.5 font-heading font-bold uppercase tracking-wider transition"
+                >
+                  <span>SPEC</span>
+                  <span class="inline-block transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
+                </a>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    // ============================================================================
+    // NETFLIX-STYLE FEATURED BILLBOARD & MULTI-IMAGE ARTICLE CARDS
+    // ============================================================================
+    function renderFeaturedBillboard() {
+      if (!allPosts.length) {
+        featuredBillboard.classList.add('hidden');
+        return;
+      }
+      featuredBillboard.classList.remove('hidden');
+
+      const post = allPosts[billboardIdx % allPosts.length];
+      const images = post.images?.length ? post.images : ['https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=85'];
+      const currentImg = images[billboardImgIdx % images.length];
+      const dateStr = formatThaiDate(post.created_at);
+
+      featuredBillboard.innerHTML = `
+        <div class="grid grid-cols-1 lg:grid-cols-12">
+          <!-- รูปภาพโชว์บนหัว/ด้านหน้าเด่นๆ พร้อมปุ่มเลื่อนซ้าย-ขวาเมื่อมีหลายรูป -->
+          <div class="lg:col-span-7 relative aspect-[16/10] lg:aspect-auto lg:min-h-[380px] bg-[#151515] overflow-hidden group">
+            <img
+              src="${escapeHtml(currentImg)}"
+              alt="${escapeHtml(post.title)}"
+              class="w-full h-full object-cover transition-all duration-700"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-[#242424] via-transparent to-transparent"></div>
+
+            <!-- Badge แสดงจำนวนรูปและปุ่มเลื่อนรูปใน Featured Post -->
+            <div class="absolute top-4 left-4 flex items-center gap-2">
+              <span class="bg-[#FF4F18] text-white text-[11px] font-heading font-bold px-3 py-1 uppercase tracking-widest">
+                FEATURED SPOTLIGHT
+              </span>
+              <span class="bg-[#151515]/90 border border-[#4F4F4F] text-[#F5F5F5] text-[11px] font-heading font-bold px-2.5 py-1">
+                โพสต์เมื่อ: ${escapeHtml(dateStr)}
+              </span>
+            </div>
+
+            ${images.length > 1 ? `
+              <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between">
+                <div class="flex items-center gap-1.5 bg-[#151515]/85 border border-[#4F4F4F] px-3 py-1.5">
+                  ${images.map((_, i) => `
+                    <button type="button" data-bb-img="${i}" class="h-1.5 transition-all ${i === (billboardImgIdx % images.length) ? 'w-6 bg-[#FF4F18]' : 'w-2 bg-[#4F4F4F]'}" aria-label="ดูรูปที่ ${i + 1}"></button>
+                  `).join('')}
+                  <span class="ml-2 text-[11px] font-heading text-[#B8B8B8]">${(billboardImgIdx % images.length) + 1}/${images.length} รูป</span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                  <button type="button" id="bbPrevImgBtn" class="w-8 h-8 bg-[#151515]/90 border border-[#4F4F4F] hover:border-[#FF4F18] text-white text-xs flex items-center justify-center">&larr;</button>
+                  <button type="button" id="bbNextImgBtn" class="w-8 h-8 bg-[#151515]/90 border border-[#4F4F4F] hover:border-[#FF4F18] text-white text-xs flex items-center justify-center">&rarr;</button>
+                </div>
+              </div>
+            ` : ''}
+          </div>
+
+          <!-- เนื้อหาบทความ Featured -->
+          <div class="lg:col-span-5 p-6 sm:p-8 lg:p-10 flex flex-col justify-between space-y-6">
+            <div class="space-y-4">
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-xs font-heading font-bold uppercase tracking-widest text-[#FF4F18]">
+                  ${escapeHtml(post.tag || 'CORPORATE UPDATE')}
+                </span>
+                <span class="text-xs font-heading text-[#909090]">
+                  บทความแนะนำ ${billboardIdx + 1} / ${allPosts.length}
+                </span>
+              </div>
+              <h3 class="font-heading font-bold text-xl sm:text-2xl text-[#F5F5F5] leading-snug">
+                ${escapeHtml(post.title)}
+              </h3>
+              <p class="text-sm text-[#B8B8B8] line-clamp-4 leading-relaxed">
+                ${escapeHtml(post.content)}
+              </p>
+            </div>
+
+            <div class="pt-4 border-t border-[#4F4F4F] flex flex-wrap items-center justify-between gap-3">
+              <button
+                type="button"
+                data-open-post="${escapeHtml(String(post.id))}"
+                class="btn-primary px-6 py-3 text-xs font-heading font-bold uppercase tracking-widest inline-flex items-center gap-2"
+              >
+                <span>อ่านบทความเต็ม</span>
+                <span>&rarr;</span>
+              </button>
+              <div class="flex items-center gap-2">
+                <button
+                  type="button"
+                  id="bbPrevPostBtn"
+                  class="btn-secondary px-3 py-2 text-xs font-heading uppercase"
+                >
+                  &larr; ก่อนหน้า
+                </button>
+                <button
+                  type="button"
+                  id="bbNextPostBtn"
+                  class="btn-secondary px-3 py-2 text-xs font-heading uppercase"
+                >
+                  ถัดไป &rarr;
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      // Bind Billboard Controls
+      document.getElementById('bbPrevImgBtn')?.addEventListener('click', () => {
+        billboardImgIdx = (billboardImgIdx - 1 + images.length) % images.length;
+        renderFeaturedBillboard();
+      });
+      document.getElementById('bbNextImgBtn')?.addEventListener('click', () => {
+        billboardImgIdx = (billboardImgIdx + 1) % images.length;
+        renderFeaturedBillboard();
+      });
+      featuredBillboard.querySelectorAll('[data-bb-img]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          billboardImgIdx = Number(btn.getAttribute('data-bb-img'));
+          renderFeaturedBillboard();
+        });
+      });
+      document.getElementById('bbPrevPostBtn')?.addEventListener('click', () => {
+        billboardIdx = (billboardIdx - 1 + allPosts.length) % allPosts.length;
+        billboardImgIdx = 0;
+        renderFeaturedBillboard();
+      });
+      document.getElementById('bbNextPostBtn')?.addEventListener('click', () => {
+        billboardIdx = (billboardIdx + 1) % allPosts.length;
+        billboardImgIdx = 0;
+        renderFeaturedBillboard();
+      });
+      featuredBillboard.querySelector('[data-open-post]')?.addEventListener('click', () => {
+        openArticleModal(post);
+      });
+    }
+
+    // สร้างการ์ดบทความในแถวสไลด์ (รูปภาพอยู่บนหัวก่อนบทความ + เลื่อนซ้ายขวาได้เมื่อมีมากกว่า 1 รูป)
+    function renderPostsTrack() {
+      if (!allPosts.length) {
+        postsTrack.innerHTML = '<div class="p-8 text-sm text-[#909090]">ยังไม่มีบทความอัปเดต</div>';
+        return;
+      }
+
+      postsTrack.innerHTML = allPosts.map((post, cardIndex) => {
+        const images = post.images?.length ? post.images : ['https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=85'];
+        const dateStr = formatThaiDate(post.created_at);
+        const multiImgControls = images.length > 1 ? `
+          <button
+            type="button"
+            data-card-prev="${cardIndex}"
+            aria-label="รูปก่อนหน้า"
+            class="absolute left-2.5 top-1/2 -translate-y-1/2 w-8 h-8 bg-[#151515]/85 border border-[#4F4F4F] hover:border-[#FF4F18] text-white text-xs flex items-center justify-center z-10 transition"
+          >
+            &larr;
+          </button>
+          <button
+            type="button"
+            data-card-next="${cardIndex}"
+            aria-label="รูปถัดไป"
+            class="absolute right-2.5 top-1/2 -translate-y-1/2 w-8 h-8 bg-[#151515]/85 border border-[#4F4F4F] hover:border-[#FF4F18] text-white text-xs flex items-center justify-center z-10 transition"
+          >
+            &rarr;
+          </button>
+          <div class="absolute bottom-2.5 right-2.5 bg-[#151515]/90 border border-[#4F4F4F] px-2 py-0.5 text-[10px] font-heading font-bold text-[#FF4F18] z-10" data-card-counter="${cardIndex}">
+            1 / ${images.length}
+          </div>
+          <div class="absolute bottom-3 left-3 flex items-center gap-1 z-10" data-card-dots="${cardIndex}">
+            ${images.map((_, i) => `<span class="block h-1 transition-all ${i === 0 ? 'w-4 bg-[#FF4F18]' : 'w-1.5 bg-white/50'}"></span>`).join('')}
+          </div>
+        ` : '';
+
+        return `
+          <article
+            class="corp-card shrink-0 w-[85vw] sm:w-[360px] lg:w-[390px] flex flex-col overflow-hidden group"
+            data-post-card="${cardIndex}"
+            data-img-idx="0"
+          >
+            <!-- รูปภาพโชว์บนหัวก่อนบทความ (Multi-Image Carousel Header) -->
+            <div class="relative w-full h-56 bg-[#151515] border-b border-[#4F4F4F] overflow-hidden">
+              <img
+                data-card-img="${cardIndex}"
+                src="${escapeHtml(images[0])}"
+                alt="${escapeHtml(post.title)}"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-[#151515]/80 via-transparent to-transparent pointer-events-none"></div>
+
+              <!-- วันที่โพสต์ขึ้นเว็บ แสดงชัดเจนบนหัวการ์ด -->
+              <div class="absolute top-3 left-3 bg-[#151515]/90 border border-[#4F4F4F] px-2.5 py-1 flex items-center gap-2 z-10">
+                <span class="w-1.5 h-1.5 bg-[#FF4F18]"></span>
+                <time class="text-[11px] font-heading font-bold text-[#F5F5F5]">${escapeHtml(dateStr)}</time>
+              </div>
+
+              <span class="absolute top-3 right-3 bg-[#FF4F18] text-white text-[10px] font-heading font-bold px-2.5 py-1 uppercase tracking-wider z-10">
+                ${escapeHtml(post.tag || 'UPDATE')}
+              </span>
+
+              ${multiImgControls}
+            </div>
+
+            <!-- เนื้อหาบทความใต้รูปภาพ -->
+            <div class="p-6 flex-1 flex flex-col">
+              <h3 class="font-heading font-bold text-base sm:text-lg text-[#F5F5F5] group-hover:text-[#FF4F18] transition-colors leading-snug mb-3 line-clamp-2">
+                ${escapeHtml(post.title)}
+              </h3>
+              <p class="text-xs sm:text-sm text-[#B8B8B8] line-clamp-3 leading-relaxed flex-1 mb-5">
+                ${escapeHtml(post.content)}
+              </p>
+              <div class="pt-4 border-t border-[#4F4F4F]/60 flex items-center justify-between text-xs mt-auto">
+                <span class="text-[#909090] font-heading">${images.length} รูปภาพในโพสต์</span>
+                <button
+                  type="button"
+                  data-read-post="${cardIndex}"
+                  class="font-heading font-bold uppercase tracking-wider text-[#F5F5F5] group-hover:text-[#FF4F18] inline-flex items-center gap-1"
+                >
+                  <span>อ่านบทความ</span>
+                  <span>&rarr;</span>
+                </button>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('');
+
+      // Bind per-card multi-image slide controls
+      postsTrack.querySelectorAll('[data-card-prev]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          stepCardImage(Number(btn.getAttribute('data-card-prev')), -1);
+        });
+      });
+
+      postsTrack.querySelectorAll('[data-card-next]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          stepCardImage(Number(btn.getAttribute('data-card-next')), 1);
+        });
+      });
+
+      postsTrack.querySelectorAll('[data-read-post]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const idx = Number(btn.getAttribute('data-read-post'));
+          openArticleModal(allPosts[idx]);
+        });
+      });
+    }
+
+    function stepCardImage(cardIndex, delta) {
+      const post = allPosts[cardIndex];
+      if (!post || !post.images || post.images.length <= 1) return;
+
+      const cardEl = postsTrack.querySelector(`[data-post-card="${cardIndex}"]`);
+      if (!cardEl) return;
+
+      const total = post.images.length;
+      const nextIdx = (Number(cardEl.getAttribute('data-img-idx') || 0) + delta + total) % total;
+      cardEl.setAttribute('data-img-idx', String(nextIdx));
+
+      const imgEl = cardEl.querySelector(`[data-card-img="${cardIndex}"]`);
+      if (imgEl) imgEl.src = post.images[nextIdx];
+
+      const counterEl = cardEl.querySelector(`[data-card-counter="${cardIndex}"]`);
+      if (counterEl) counterEl.textContent = `${nextIdx + 1} / ${total}`;
+
+      const dotsContainer = cardEl.querySelector(`[data-card-dots="${cardIndex}"]`);
+      if (dotsContainer) {
+        dotsContainer.innerHTML = post.images.map((_, i) =>
+          `<span class="block h-1 transition-all ${i === nextIdx ? 'w-4 bg-[#FF4F18]' : 'w-1.5 bg-white/50'}"></span>`
+        ).join('');
+      }
+    }
+
+    // Modal อ่านบทความเต็ม พร้อมเลื่อนรูปซ้าย-ขวา
+    function openArticleModal(post) {
+      if (!post) return;
+      modalPostTag.textContent = post.tag || 'INSIGHT';
+      modalPostDate.textContent = 'โพสต์เมื่อ: ' + formatThaiDate(post.created_at);
+      modalPostTitle.textContent = post.title;
+      modalPostContent.textContent = post.content;
+
+      const images = post.images?.length ? post.images : ['https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=85'];
+      let modalImgIdx = 0;
+
+      function renderModalCarousel() {
+        modalCarouselContainer.innerHTML = `
+          <img src="${escapeHtml(images[modalImgIdx])}" alt="${escapeHtml(post.title)}" class="w-full h-full object-cover" />
+          ${images.length > 1 ? `
+            <button type="button" id="modalPrevImg" class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-[#151515]/85 border border-[#4F4F4F] hover:border-[#FF4F18] text-white flex items-center justify-center">&larr;</button>
+            <button type="button" id="modalNextImg" class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-[#151515]/85 border border-[#4F4F4F] hover:border-[#FF4F18] text-white flex items-center justify-center">&rarr;</button>
+            <div class="absolute bottom-3 right-3 bg-[#151515]/90 border border-[#4F4F4F] px-3 py-1 text-xs font-heading font-bold text-[#FF4F18]">
+              ${modalImgIdx + 1} / ${images.length}
+            </div>
+          ` : ''}
+        `;
+        document.getElementById('modalPrevImg')?.addEventListener('click', () => {
+          modalImgIdx = (modalImgIdx - 1 + images.length) % images.length;
+          renderModalCarousel();
+        });
+        document.getElementById('modalNextImg')?.addEventListener('click', () => {
+          modalImgIdx = (modalImgIdx + 1) % images.length;
+          renderModalCarousel();
+        });
+      }
+
+      renderModalCarousel();
+      articleModal.classList.remove('hidden');
+    }
+
+    closeArticleModalBtn?.addEventListener('click', () => articleModal.classList.add('hidden'));
+    articleModal?.addEventListener('click', (e) => {
+      if (e.target === articleModal) articleModal.classList.add('hidden');
+    });
+
+    // ปุ่มเลื่อนแถวการ์ดบทความซ้าย-ขวา (Netflix Row Scroll)
+    feedPrevBtn?.addEventListener('click', () => {
+      if (postsTrack.scrollLeft <= 20) {
+        postsTrack.scrollTo({ left: postsTrack.scrollWidth, behavior: 'smooth' });
+      } else {
+        postsTrack.scrollBy({ left: -410, behavior: 'smooth' });
+      }
+    });
+
+    feedNextBtn?.addEventListener('click', () => {
+      const maxScroll = postsTrack.scrollWidth - postsTrack.clientWidth;
+      if (postsTrack.scrollLeft >= maxScroll - 20) {
+        postsTrack.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        postsTrack.scrollBy({ left: 410, behavior: 'smooth' });
+      }
+    });
+
+    // หยุดสไลด์ชั่วคราวเมื่อเมาส์วางอยู่บนแถวบทความหรือปุ่มเลื่อน
+    [featuredBillboard, postsTrack, feedPrevBtn, feedNextBtn].forEach(el => {
+      el?.addEventListener('mouseenter', () => {
+        isFeedPaused = true;
+        if (autoPlayStatusBadge) autoPlayStatusBadge.textContent = 'AUTO-SLIDE: PAUSED';
+      });
+      el?.addEventListener('mouseleave', () => {
+        isFeedPaused = false;
+        if (autoPlayStatusBadge) autoPlayStatusBadge.textContent = 'AUTO-SLIDE: ON';
+      });
+    });
+
+    // จับเวลาเลื่อนรูปในการ์ด + เลื่อนแถวการ์ดอัตโนมัติ (Netflix Auto-Advance Timer)
+    setInterval(() => {
+      if (isFeedPaused || !allPosts.length) return;
+
+      // 1. เลื่อนรูปภาพในแต่ละการ์ดที่มีหลายรูปอัตโนมัติ
+      allPosts.forEach((p, idx) => {
+        if (p.images && p.images.length > 1) {
+          stepCardImage(idx, 1);
+        }
+      });
+
+      // 2. เลื่อนรูปหรือสลับบทความใน Featured Spotlight Billboard
+      const activeBillboardPost = allPosts[billboardIdx % allPosts.length];
+      const bbImagesCount = activeBillboardPost?.images?.length || 1;
+      if (billboardImgIdx + 1 < bbImagesCount) {
+        billboardImgIdx++;
+      } else {
+        billboardImgIdx = 0;
+        billboardIdx = (billboardIdx + 1) % allPosts.length;
+      }
+      renderFeaturedBillboard();
+    }, 4000);
+
+    // เลื่อนแถวการ์ดแนวนอนอัตโนมัติทุก 5.5 วินาที
+    setInterval(() => {
+      if (isFeedPaused || !postsTrack) return;
+      const maxScroll = postsTrack.scrollWidth - postsTrack.clientWidth;
+      if (maxScroll <= 0) return;
+      if (postsTrack.scrollLeft >= maxScroll - 20) {
+        postsTrack.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        postsTrack.scrollBy({ left: 410, behavior: 'smooth' });
+      }
+    }, 5500);
+
+    // ============================================================================
+    // LOAD DATA FROM SUPABASE + MERGE DEMO DATA
+    // ============================================================================
+    async function loadItems() {
+      const { data, error } = await supabase
+        .from('items')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        // หากยังไม่มีตารางหรือออฟไลน์ ให้แสดง Demo ทันที
+        allItems = [...DEMO_CATALOG_ITEMS];
+        allPosts = [...DEMO_POSTS];
+        populateTags(allItems);
+        renderItems();
+        renderFeaturedBillboard();
+        renderPostsTrack();
+        return;
+      }
+
+      const rows = data || [];
+
+      // 1. Site Config
+      const configRow = rows.find(r => r.price_or_tag === SITE_CONFIG_TAG);
+      if (configRow?.description) {
+        try {
+          applySiteConfig(JSON.parse(configRow.description));
+        } catch (_e) {
+          // ignore
+        }
+      }
+
+      // 2. Posts / Articles (รวมโพสต์จริงจาก DB + Demo Posts)
+      const dbPosts = rows
+        .filter(r => r.price_or_tag === POST_ITEM_TAG)
+        .map(parsePostItem);
+      allPosts = [...dbPosts, ...DEMO_POSTS];
+
+      // 3. Catalog Items (รวมสินค้าจริงจาก DB + Demo Catalog Items)
+      const dbCatalog = rows.filter(
+        r => r.price_or_tag !== SITE_CONFIG_TAG && r.price_or_tag !== POST_ITEM_TAG
+      );
+      allItems = [...dbCatalog, ...DEMO_CATALOG_ITEMS];
+
+      if (heroItemCount) {
+        heroItemCount.textContent = `${allItems.length} SOLUTIONS & ${allPosts.length} INSIGHTS ACTIVE`;
+      }
+
+      populateTags(allItems);
+      renderItems();
+      renderFeaturedBillboard();
+      renderPostsTrack();
+    }
+
+    searchInput.addEventListener('input', renderItems);
+    tagFilter.addEventListener('change', renderItems);
+
+    loadItems();
+  </script>
+</body>
+</html>

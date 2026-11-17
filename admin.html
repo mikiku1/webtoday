@@ -1,0 +1,1434 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ADMIN CONSOLE | TODAY DEVELOPMENT CO., LTD.</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Kanit:wght@500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      /* Official Corporate Colors */
+      --brand-primary: #4F4F4F;
+      --brand-accent: #FF4F18;
+
+      /* Background System */
+      --bg-primary: #151515;
+      --bg-secondary: #242424;
+      --bg-card: #303030;
+      --bg-elevated: #3A3A3A;
+
+      /* Typography */
+      --text-primary: #F5F5F5;
+      --text-secondary: #B8B8B8;
+      --text-muted: #909090;
+
+      /* Borders */
+      --border-primary: #4F4F4F;
+
+      /* Interactive States */
+      --accent-hover: #FF7043;
+      --accent-glow: rgba(255, 79, 24, 0.18);
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: 'Inter', 'IBM Plex Sans Thai', sans-serif;
+    }
+
+    .font-display {
+      font-family: 'Bebas Neue', 'Space Grotesk', 'Kanit', sans-serif;
+    }
+
+    .font-heading {
+      font-family: 'Space Grotesk', 'Kanit', sans-serif;
+    }
+
+    /* Smooth Smoked-Titanium Logo Plinth (ไม่ขาวจ้า เนียนตากับธีมมืด) */
+    .logo-plinth {
+      background: linear-gradient(135deg, rgba(190, 192, 198, 0.86) 0%, rgba(152, 155, 162, 0.78) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-left: 3px solid var(--brand-accent);
+      border-radius: 4px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(8px);
+    }
+
+    .admin-surface {
+      background:
+        radial-gradient(circle at 85% 15%, rgba(255, 79, 24, 0.08), transparent 40%),
+        #151515;
+    }
+
+    .btn-primary {
+      background-color: var(--brand-accent);
+      color: #FFFFFF;
+      transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background-color: var(--accent-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px var(--accent-glow);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .btn-secondary {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-primary);
+      color: var(--text-primary);
+      transition: border-color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--brand-accent);
+      background-color: var(--bg-elevated);
+    }
+
+    .tab-btn {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-primary);
+      color: var(--text-secondary);
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn.active {
+      background-color: var(--brand-accent);
+      border-color: var(--brand-accent);
+      color: #FFFFFF;
+    }
+
+    .corp-input {
+      background-color: var(--bg-primary);
+      border: 1px solid var(--border-primary);
+      color: var(--text-primary);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .corp-input:focus {
+      outline: none;
+      border-color: var(--brand-accent);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+  </style>
+</head>
+<body class="admin-surface min-h-screen flex flex-col selection:bg-[#FF4F18] selection:text-white">
+
+  <!-- ============================================================================
+       HEADER
+       ============================================================================ -->
+  <header class="bg-[#151515]/95 backdrop-blur-md border-b border-[#4F4F4F] sticky top-0 z-40">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-24 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-4">
+        <a href="./index.html" class="flex items-center gap-3.5 group">
+          <div class="logo-plinth px-3.5 py-2 flex items-center justify-center">
+            <img src="./logo.png" alt="TODAY DEVELOPMENT CO., LTD." class="h-8 sm:h-9 w-auto object-contain block" />
+          </div>
+          <div class="hidden sm:block">
+            <span class="font-heading font-bold text-sm tracking-wider uppercase text-[#F5F5F5] block">ADMIN CONSOLE</span>
+            <span class="text-[11px] font-heading tracking-widest uppercase text-[#FF4F18] block">TODAY DEVELOPMENT CO., LTD.</span>
+          </div>
+        </a>
+        <span class="text-[#4F4F4F]">|</span>
+        <a href="./index.html" class="text-xs sm:text-sm font-heading uppercase tracking-wider text-[#B8B8B8] hover:text-[#FF4F18] transition">
+          ดูหน้าเว็บหลัก &rarr;
+        </a>
+      </div>
+
+      <div id="userControls" class="hidden flex items-center gap-4">
+        <div class="hidden md:flex items-center gap-2 px-3 py-1 bg-[#242424] border border-[#4F4F4F]">
+          <span class="w-2 h-2 bg-[#FF4F18]"></span>
+          <span id="userEmail" class="text-xs font-heading text-[#B8B8B8]"></span>
+        </div>
+        <button
+          id="logoutBtn"
+          type="button"
+          class="btn-secondary px-4 py-2 text-xs font-heading font-semibold uppercase tracking-wider"
+        >
+          ออกจากระบบ
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================================
+       MAIN WORKSPACE
+       ============================================================================ -->
+  <main class="max-w-6xl mx-auto w-full px-4 sm:px-6 py-10 flex-1">
+    <!-- Alert Banner -->
+    <div id="alertBox" class="hidden mb-6 p-4 text-sm font-medium border"></div>
+
+    <!-- Section 1: Login Form (แสดงเมื่อยังไม่ได้ล็อกอิน) -->
+    <section id="authSection" class="max-w-md mx-auto bg-[#303030] border border-[#4F4F4F] p-6 sm:p-8 shadow-2xl relative">
+      <div class="w-12 h-1 bg-[#FF4F18] mb-6"></div>
+      <div class="mb-6">
+        <div class="text-xs font-heading uppercase tracking-widest text-[#FF4F18] mb-1">SECURITY GATEWAY</div>
+        <h1 class="font-display text-4xl uppercase tracking-wide text-[#F5F5F5]">เข้าสู่ระบบผู้ดูแล</h1>
+        <p class="text-xs text-[#B8B8B8] mt-1">TODAY DEVELOPMENT CO., LTD. — เฉพาะผู้ดูแลระบบเท่านั้น</p>
+      </div>
+
+      <form id="loginForm" class="space-y-5">
+        <div>
+          <label for="emailInput" class="block text-xs font-heading uppercase tracking-wider text-[#B8B8B8] mb-2">อีเมล (EMAIL)</label>
+          <input
+            id="emailInput"
+            type="email"
+            required
+            placeholder="admin@example.com"
+            class="corp-input w-full px-4 py-3 text-sm placeholder-[#909090]"
+          />
+        </div>
+        <div>
+          <label for="passwordInput" class="block text-xs font-heading uppercase tracking-wider text-[#B8B8B8] mb-2">รหัสผ่าน (PASSWORD)</label>
+          <input
+            id="passwordInput"
+            type="password"
+            required
+            placeholder="••••••••"
+            class="corp-input w-full px-4 py-3 text-sm placeholder-[#909090]"
+          />
+        </div>
+        <button
+          id="loginSubmitBtn"
+          type="submit"
+          class="btn-primary w-full py-3.5 text-xs font-heading font-bold uppercase tracking-widest"
+        >
+          เข้าสู่ระบบ &rarr;
+        </button>
+      </form>
+    </section>
+
+    <!-- Section 2: Admin Dashboard (แสดงเมื่อล็อกอินแล้ว) -->
+    <section id="dashboardSection" class="hidden space-y-8">
+
+      <!-- Mode Switcher Tabs (3 หมวดจัดการครบทุกส่วนของหน้าเว็บ) -->
+      <div class="flex flex-wrap gap-3 border-b border-[#4F4F4F] pb-5">
+        <button
+          id="tabCatalogBtn"
+          type="button"
+          class="tab-btn active px-5 py-3 text-xs font-heading font-bold uppercase tracking-widest"
+        >
+          01 / จัดการสินค้า &amp; สเปค (Catalog &amp; Specs)
+        </button>
+        <button
+          id="tabPostsBtn"
+          type="button"
+          class="tab-btn px-5 py-3 text-xs font-heading font-bold uppercase tracking-widest"
+        >
+          02 / อัปโพสต์บทความ &amp; ข่าวสาร (Articles Feed)
+        </button>
+        <button
+          id="tabSiteConfigBtn"
+          type="button"
+          class="tab-btn px-5 py-3 text-xs font-heading font-bold uppercase tracking-widest"
+        >
+          03 / ตั้งค่าเนื้อหาหน้าบ้านทั้งหมด (Site &amp; Contact)
+        </button>
+      </div>
+
+      <!-- ======================================================================
+           PANEL 01: CATALOG ITEMS & TECHNICAL SPECS CRUD
+           ====================================================================== -->
+      <div id="catalogPanel" class="space-y-10">
+        <!-- Form เพิ่ม / แก้ไขข้อมูลสินค้าและสเปค -->
+        <div class="bg-[#303030] border border-[#4F4F4F] p-6 sm:p-8">
+          <div class="flex flex-wrap items-center justify-between gap-4 pb-5 mb-6 border-b border-[#4F4F4F]">
+            <div>
+              <span class="text-xs font-heading font-bold uppercase tracking-widest text-[#FF4F18]">01 / CATALOG &amp; SPECIFICATION ENTRY</span>
+              <h2 id="formTitle" class="font-heading text-xl font-bold text-[#F5F5F5] mt-1">เพิ่มสินค้า / โซลูชันพร้อมสเปค</h2>
+            </div>
+            <button
+              id="cancelEditBtn"
+              type="button"
+              class="hidden btn-secondary px-4 py-2 text-xs font-heading font-semibold uppercase tracking-wider"
+            >
+              ยกเลิกการแก้ไข
+            </button>
+          </div>
+
+          <form id="itemForm" class="space-y-5">
+            <input type="hidden" id="itemId" value="" />
+            <input type="hidden" id="existingImageUrl" value="" />
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label for="titleInput" class="block text-xs font-heading uppercase tracking-wider text-[#B8B8B8] mb-2">
+                  ชื่อเรื่อง / ชื่อสินค้า *
+                </label>
+                <input
+                  id="titleInput"
+                  type="text"
+                  required
+                  placeholder="เช่น TD-ARM X7 INDUSTRIAL ROBOTICS"
+                  class="corp-input w-full px-4 py-3 text-sm placeholder-[#909090]"
+                />
+              </div>
+              <div>
+                <label for="priceOrTagInput" class="block text-xs font-heading uppercase tracking-wider text-[#B8B8B8] mb-2">
+                  ราคา หรือ หมวดหมู่
+                </label>
+                <input
+                  id="priceOrTagInput"
+                  type="text"
+                  placeholder="เช่น AI & AUTOMATION หรือ 45,000 บาท"
+                  class="corp-input w-full px-4 py-3 text-sm placeholder-[#909090]"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label for="descriptionInput" class="block text-xs font-heading uppercase tracking-wider text-[#B8B8B8] mb-2">
+                รายละเอียดภาพรวม (Summary Description)
+              </label>
+              <textarea
+                id="descriptionInput"
+                rows="3"
+                placeholder="กรอกคำอธิบายภาพรวมสำหรับแสดงในการ์ดและหน้าสเปค..."
+                class="corp-input w-full px-4 py-3 text-sm placeholder-[#909090]"
+              ></textarea>
+            </div>
+
+            <div>
+              <label for="specsInput" class="block text-xs font-heading uppercase tracking-wider text-[#FF4F18] mb-2">
+                สเปคโดยละเอียดสำหรับหน้า SPEC (บรรทัดละ 1 หัวข้อ เช่น รุ่น: TD-X7)
+              </label>
+              <textarea
+                id="specsInput"
+                rows="5"
+                placeholder="รุ่น (Model): TD-ARM X7&#10;น้ำหนักบรรทุกสูงสุด (Payload): 25 kg&#10;ระยะเอื้อม (Max Reach): 1,850 mm&#10;มาตรฐานการป้องกัน (IP Rating): IP67"
+                class="corp-input w-full px-4 py-3 text-sm placeholder-[#909090]"
+              ></textarea>
+            </div>
+
+            <div>
+              <label for="imageFileInput" class="block text-xs font-heading uppercase tracking-wider text-[#B8B8B8] mb-2">
+                รูปภาพสินค้า/สเปค (เลือกได้หลายรูปพร้อมกัน — อัปโหลดเข้า Bucket `images`)
+              </label>
+              <input
+                id="imageFileInput"
+                type="file"
+                accept="image/*"
+                multiple
+                class="block w-full text-sm text-[#B8B8B8] bg-[#151515] border border-[#4F4F4F] p-2 file:mr-4 file:border-0 file:bg-[#FF4F18] file:px-4 file:py-2 file:text-xs file:font-heading file:font-bold file:uppercase file:tracking-wider file:text-white hover:file:bg-[#FF7043] cursor-pointer"
+              />
+              <p id="currentImageHint" class="hidden mt-2 text-xs text-[#FF4F18]"></p>
+            </div>
+
+            <div class="pt-2">
+              <button
+                id="saveBtn"
+                type="submit"
+                class="btn-primary px-7 py-3.5 text-xs font-heading font-bold uppercase tracking-widest"
+              >
+                บันทึกข้อมูลสินค้า &amp; สเปค
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- รายการข้อมูลทั้งหมด -->
+        <div class="bg-[#303030] border border-[#4F4F4F] p-6 sm:p-8">
+          <div class="pb-5 mb-4 border-b border-[#4F4F4F] flex items-center justify-between">
+            <div>
+              <span class="text-xs font-heading font-bold uppercase tracking-widest text-[#FF4F18]">02 / CATALOG RECORDS</span>
+              <h2 class="font-heading text-xl font-bold text-[#F5F5F5] mt-1">รายการสินค้าและสเปคในฐานข้อมูล</h2>
+            </div>
+          </div>
+
+          <div id="adminItemsList" class="divide-y divide-[#4F4F4F]">
+            <p class="text-sm text-[#B8B8B8] py-6">กำลังโหลดข้อมูล...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======================================================================
+           PANEL 02: ARTICLES & MULTI-IMAGE ACTIVITY POSTS MANAGER
+           ====================================================================== -->
+      <div id="postsPanel" class="hidden space-y-10">
+        <div class="bg-[#303030] border border-[#4F4F4F] p-6 sm:p-8">
+          <div class="flex flex-wrap items-center justify-between gap-4 pb-5 mb-6 border-b border-[#4F4F4F]">
+            <div>
+              <span class="text-xs font-heading font-bold uppercase tracking-widest text-[#FF4F18]">01 / PUBLISH ARTICLE OR ACTIVITY UPDATE</span>
+              <h2 id="postFormTitle" class="font-heading text-xl font-bold text-[#F5F5F5] mt-1">อัปโหลดบทความ / ข่าวสารใหม่ (รองรับหลายรูปสไลด์อัตโนมัติ)</h2>
+            </div>
+            <button
+              id="cancelPostEditBtn"
+              type="button"
+              class="hidden btn-secondary px-4 py-2 text-xs font-heading font-semibold uppercase tracking-wider"
+            >
+              ยกเลิกการแก้ไขโพสต์
+            </button>
+          </div>
+
+          <form id="postForm" class="space-y-5">
+            <input type="hidden" id="postId" value="" />
+            <input type="hidden" id="existingPostImagesJson" value="[]" />
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+              <div class="sm:col-span-2">
+                <label for="postTitleInput" class="block text-xs font-heading uppercase tracking-wider text-[#B8B8B8] mb-2">
+                  หัวข้อบทความ / ข่าวสาร *
+                </label>
+                <input
+                  id="postTitleInput"
+                  type="text"
+                  required
+                  placeholder="เช่น อัปเดตโครงการติดตั้งระบบอัตโนมัติประจำเดือน..."
+                  class="corp-input w-full px-4 py-3 text-sm placeholder-[#909090]"
+                />
+              </div>
+              <div>
+                <label for="postTagInput" class="block text-xs font-heading uppercase tracking-wider text-[#B8B8B8] mb-2">
+                  หมวดหมู่บทความ (TAG)
+                </label>
+                <input
+                  id="postTagInput"
+                  type="text"
+                  placeholder="เช่น CORPORATE HIGHLIGHT / PROJECT UPDATE"
+                  class="corp-input w-full px-4 py-3 text-sm placeholder-[#909090]"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label for="postContentInput" class="block text-xs font-heading uppercase tracking-wider text-[#B8B8B8] mb-2">
+                เนื้อหาบทความ *
+              </label>
+              <textarea
+                id="postContentInput"
+                rows="5"
+                required
+                placeholder="เขียนเนื้อหาบทความหรือรายละเอียดกิจกรรมที่นี่..."
+                class="corp-input w-full px-4 py-3 text-sm placeholder-[#909090]"
+              ></textarea>
+            </div>
+
+            <div>
+              <label for="postImagesInput" class="block text-xs font-heading uppercase tracking-wider text-[#FF4F18] mb-2">
+                รูปภาพประจำบทความ (เลือกได้มากกว่า 1 รูป เพื่อให้การ์ดเลื่อนซ้าย-ขวาและสไลด์ออโต้)
+              </label>
+              <input
+                id="postImagesInput"
+                type="file"
+                accept="image/*"
+                multiple
+                class="block w-full text-sm text-[#B8B8B8] bg-[#151515] border border-[#4F4F4F] p-2 file:mr-4 file:border-0 file:bg-[#FF4F18] file:px-4 file:py-2 file:text-xs file:font-heading file:font-bold file:uppercase file:tracking-wider file:text-white hover:file:bg-[#FF7043] cursor-pointer"
+              />
+              <p id="currentPostImagesHint" class="hidden mt-2 text-xs text-[#FF4F18]"></p>
+            </div>
+
+            <div class="pt-2">
+              <button
+                id="savePostBtn"
+                type="submit"
+                class="btn-primary px-7 py-3.5 text-xs font-heading font-bold uppercase tracking-widest"
+              >
+                โพสต์บทความขึ้นหน้าเว็บ
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- รายการบทความที่โพสต์แล้ว -->
+        <div class="bg-[#303030] border border-[#4F4F4F] p-6 sm:p-8">
+          <div class="pb-5 mb-4 border-b border-[#4F4F4F] flex items-center justify-between">
+            <div>
+              <span class="text-xs font-heading font-bold uppercase tracking-widest text-[#FF4F18]">02 / PUBLISHED ARTICLES</span>
+              <h2 class="font-heading text-xl font-bold text-[#F5F5F5] mt-1">รายการบทความที่โพสต์ในฐานข้อมูล</h2>
+            </div>
+          </div>
+
+          <div id="adminPostsList" class="divide-y divide-[#4F4F4F]">
+            <p class="text-sm text-[#B8B8B8] py-6">กำลังโหลดรายการบทความ...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======================================================================
+           PANEL 03: FULL FRONTEND SITE CONTENT & CONTACT MANAGER
+           ====================================================================== -->
+      <div id="siteConfigPanel" class="hidden space-y-8">
+        <form id="siteConfigForm" class="space-y-8">
+
+          <!-- 1. Brand & Header Settings -->
+          <div class="bg-[#303030] border border-[#4F4F4F] p-6 sm:p-8 space-y-5">
+            <div class="pb-4 border-b border-[#4F4F4F]">
+              <span class="text-xs font-heading font-bold uppercase tracking-widest text-[#FF4F18]">SECTION A / BRAND &amp; HEADER</span>
+              <h3 class="font-heading text-lg font-bold text-[#F5F5F5] mt-1">ข้อมูลแบรนด์ โลโก้ และส่วนหัวเว็บไซต์</h3>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label class="block text-xs font-heading uppercase tracking-wider text-[#B8B8B8] mb-2">ชื่อบริษัท (COMPANY NAME)</label>
+                <input id="cfg_companyName" type="text" class="corp-input w-full px-4 py-2.5 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-heading uppercase tracking-wider text-[#B8B8B8] mb-2">ข้อความปุ่มบนเมนู (NAV CTA)</label>
+                <input id="cfg_navCtaText" type="text" class="corp-input w-full px-4 py-2.5 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-heading uppercase tracking-wider text-[#B8B8B8] mb-2">ลิงก์โลโก้ปัจจุบัน (LOGO URL)</label>
+                <input id="cfg_logoUrl" type="text" class="corp-input w-full px-4 py-2.5 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-heading uppercase tracking-wider text-[#B8B8B8] mb-2">หรืออัปโหลดรูปโลโก้ใหม่</label>
+                <input
+                  id="cfg_logoFile"
+                  type="file"
+                  accept="image/*"
+                  class="block w-full text-xs text-[#B8B8B8] bg-[#151515] border border-[#4F4F4F] p-1.5 file:mr-3 file:border-0 file:bg-[#FF4F18] file:px-3 file:py-1.5 file:text-xs file:font-heading file:font-bold file:uppercase file:text-white cursor-pointer"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Hero Section Settings -->
+          <div class="bg-[#303030] border border-[#4F4F4F] p-6 sm:p-8 space-y-5">
+            <div class="pb-4 border-b border-[#4F4F4F]">
+              <span class="text-xs font-heading font-bold uppercase tracking-widest text-[#FF4F18]">SECTION B / HERO BANNER</span>
+              <h3 class="font-heading text-lg font-bold text-[#F5F5F5] mt-1">ส่วนแบนเนอร์หลัก (Hero Section)</h3>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label class="block text-xs font-heading uppercase tracking-wider text-[#B8B8B8] mb-2">ป้ายกำกับด้านบน (HERO BADGE)</label>
+                <input id="cfg_heroBadge" type="text" class="corp-input w-full px-4 py-2.5 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-heading uppercase tracking-wider text-[#B8B8B8] mb-2">ข้อความปุ่มหลัก (HERO BUTTON)</label>
+                <input id="cfg_heroBtnText" type="text" class="corp-input w-full px-4 py-2.5 text-sm" />
+              </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+              <div>
+                <label class="block text-xs font-heading uppercase tracking-wider text-[#B8B8B8] mb-2">พาดหัวบรรทัดที่ 1</label>
+                <input id="cfg_heroTitle1" type="text" class="corp-input w-full px-4 py-2.5 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-heading uppercase tracking-wider text-[#B8B8B8] mb-2">พาดหัวบรรทัดที่ 2</label>
+                <input id="cfg_heroTitle2" type="text" class="corp-input w-full px-4 py-2.5 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-heading uppercase tracking-wider text-[#FF4F18] mb-2">พาดหัวบรรทัดที่ 3 (สีส้ม)</label>
+                <input id="cfg_heroTitle3" type="text" class="corp-input w-full px-4 py-2.5 text-sm" />
+              </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label class="block text-xs font-heading uppercase tracking-wider text-[#B8B8B8] mb-2">สโลแกนภาษาอังกฤษ</label>
+                <input id="cfg_heroSubtitleEn" type="text" class="corp-input w-full px-4 py-2.5 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-heading uppercase tracking-wider text-[#B8B8B8] mb-2">คำอธิบายภาษาไทย</label>
+                <input id="cfg_heroSubtitleTh" type="text" class="corp-input w-full px-4 py-2.5 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-heading uppercase tracking-wider text-[#B8B8B8] mb-2">ลิงก์รูปภาพ Hero ปัจจุบัน</label>
+                <input id="cfg_heroImageUrl" type="text" class="corp-input w-full px-4 py-2.5 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-heading uppercase tracking-wider text-[#B8B8B8] mb-2">หรืออัปโหลดรูปภาพ Hero ใหม่</label>
+                <input
+                  id="cfg_heroImageFile"
+                  type="file"
+                  accept="image/*"
+                  class="block w-full text-xs text-[#B8B8B8] bg-[#151515] border border-[#4F4F4F] p-1.5 file:mr-3 file:border-0 file:bg-[#FF4F18] file:px-3 file:py-1.5 file:text-xs file:font-heading file:font-bold file:uppercase file:text-white cursor-pointer"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Section 01: Expertise Settings -->
+          <div class="bg-[#303030] border border-[#4F4F4F] p-6 sm:p-8 space-y-5">
+            <div class="pb-4 border-b border-[#4F4F4F]">
+              <span class="text-xs font-heading font-bold uppercase tracking-widest text-[#FF4F18]">SECTION C / 01 OUR EXPERTISE</span>
+              <h3 class="font-heading text-lg font-bold text-[#F5F5F5] mt-1">ส่วนที่ 01: ความเชี่ยวชาญ 3 ด้าน</h3>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+              <div>
+                <label class="block text-xs font-heading uppercase tracking-wider text-[#B8B8B8] mb-2">ป้ายหัวข้อ (Label)</label>
+                <input id="cfg_sec1Label" type="text" class="corp-input w-full px-4 py-2.5 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-heading uppercase tracking-wider text-[#B8B8B8] mb-2">พาดหัวหลัก (Title)</label>
+                <input id="cfg_sec1Title" type="text" class="corp-input w-full px-4 py-2.5 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-heading uppercase tracking-wider text-[#B8B8B8] mb-2">คำอธิบาย</label>
+                <input id="cfg_sec1Desc" type="text" class="corp-input w-full px-4 py-2.5 text-sm" />
+              </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 pt-2">
+              <div class="bg-[#242424] border border-[#4F4F4F] p-4 space-y-3">
+                <div class="text-xs font-heading font-bold text-[#FF4F18]">การ์ดใบที่ 1</div>
+                <input id="cfg_pillar1Title" type="text" placeholder="หัวข้อการ์ด 1" class="corp-input w-full px-3 py-2 text-sm" />
+                <textarea id="cfg_pillar1Desc" rows="2" placeholder="รายละเอียดการ์ด 1" class="corp-input w-full px-3 py-2 text-sm"></textarea>
+              </div>
+              <div class="bg-[#242424] border border-[#4F4F4F] p-4 space-y-3">
+                <div class="text-xs font-heading font-bold text-[#FF4F18]">การ์ดใบที่ 2</div>
+                <input id="cfg_pillar2Title" type="text" placeholder="หัวข้อการ์ด 2" class="corp-input w-full px-3 py-2 text-sm" />
+                <textarea id="cfg_pillar2Desc" rows="2" placeholder="รายละเอียดการ์ด 2" class="corp-input w-full px-3 py-2 text-sm"></textarea>
+              </div>
+              <div class="bg-[#242424] border border-[#4F4F4F] p-4 space-y-3">
+                <div class="text-xs font-heading font-bold text-[#FF4F18]">การ์ดใบที่ 3</div>
+                <input id="cfg_pillar3Title" type="text" placeholder="หัวข้อการ์ด 3" class="corp-input w-full px-3 py-2 text-sm" />
+                <textarea id="cfg_pillar3Desc" rows="2" placeholder="รายละเอียดการ์ด 3" class="corp-input w-full px-3 py-2 text-sm"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. Section 02 & Section 04 Settings -->
+          <div class="bg-[#303030] border border-[#4F4F4F] p-6 sm:p-8 space-y-5">
+            <div class="pb-4 border-b border-[#4F4F4F]">
+              <span class="text-xs font-heading font-bold uppercase tracking-widest text-[#FF4F18]">SECTION D / CATALOG &amp; CORPORATE STANDARD</span>
+              <h3 class="font-heading text-lg font-bold text-[#F5F5F5] mt-1">ส่วนหัวแคตตาล็อก และส่วนมาตรฐานองค์กร</h3>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
+              <div>
+                <label class="block text-xs font-heading uppercase tracking-wider text-[#B8B8B8] mb-2">ป้ายส่วน Catalog</label>
+                <input id="cfg_sec2Label" type="text" class="corp-input w-full px-3 py-2 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-heading uppercase tracking-wider text-[#B8B8B8] mb-2">หัวข้อสีขาว</label>
+                <input id="cfg_sec2TitleWhite" type="text" class="corp-input w-full px-3 py-2 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-heading uppercase tracking-wider text-[#FF4F18] mb-2">หัวข้อสีส้ม</label>
+                <input id="cfg_sec2TitleOrange" type="text" class="corp-input w-full px-3 py-2 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-heading uppercase tracking-wider text-[#B8B8B8] mb-2">คำอธิบาย Catalog</label>
+                <input id="cfg_sec2Desc" type="text" class="corp-input w-full px-3 py-2 text-sm" />
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-[#4F4F4F]">
+              <div>
+                <label class="block text-xs font-heading uppercase tracking-wider text-[#B8B8B8] mb-2">ป้ายส่วนมาตรฐาน</label>
+                <input id="cfg_sec3Label" type="text" class="corp-input w-full px-3 py-2 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-heading uppercase tracking-wider text-[#B8B8B8] mb-2">พาดหัว (สีขาว)</label>
+                <input id="cfg_sec3Title1" type="text" class="corp-input w-full px-3 py-2 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-heading uppercase tracking-wider text-[#FF4F18] mb-2">พาดหัว (สีส้ม)</label>
+                <input id="cfg_sec3Title2" type="text" class="corp-input w-full px-3 py-2 text-sm" />
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs font-heading uppercase tracking-wider text-[#B8B8B8] mb-2">คำอธิบายมาตรฐานองค์กร</label>
+              <textarea id="cfg_sec3Desc" rows="2" class="corp-input w-full px-3 py-2 text-sm"></textarea>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div class="bg-[#242424] border border-[#4F4F4F] p-3 space-y-2">
+                <input id="cfg_stat1Val" type="text" placeholder="99.9%" class="corp-input w-full px-3 py-1.5 text-sm font-bold" />
+                <input id="cfg_stat1Label" type="text" placeholder="SYSTEM RELIABILITY" class="corp-input w-full px-3 py-1.5 text-xs" />
+              </div>
+              <div class="bg-[#242424] border border-[#4F4F4F] p-3 space-y-2">
+                <input id="cfg_stat2Val" type="text" placeholder="RLS" class="corp-input w-full px-3 py-1.5 text-sm font-bold" />
+                <input id="cfg_stat2Label" type="text" placeholder="ENTERPRISE SECURITY" class="corp-input w-full px-3 py-1.5 text-xs" />
+              </div>
+              <div class="bg-[#242424] border border-[#4F4F4F] p-3 space-y-2">
+                <input id="cfg_stat3Val" type="text" placeholder="24/7" class="corp-input w-full px-3 py-1.5 text-sm font-bold" />
+                <input id="cfg_stat3Label" type="text" placeholder="REALTIME CLOUD SYNC" class="corp-input w-full px-3 py-1.5 text-xs" />
+              </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-heading uppercase tracking-wider text-[#B8B8B8] mb-2">หัวข้อกล่องด้านขวา</label>
+                <input id="cfg_sec3BoxTitle" type="text" class="corp-input w-full px-3 py-2 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-heading uppercase tracking-wider text-[#B8B8B8] mb-2">คำอธิบายกล่องด้านขวา</label>
+                <input id="cfg_sec3BoxDesc" type="text" class="corp-input w-full px-3 py-2 text-sm" />
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. Head Office Contact Information -->
+          <div class="bg-[#303030] border border-[#4F4F4F] p-6 sm:p-8 space-y-5">
+            <div class="pb-4 border-b border-[#4F4F4F]">
+              <span class="text-xs font-heading font-bold uppercase tracking-widest text-[#FF4F18]">SECTION E / CONTACT &amp; HEAD OFFICE</span>
+              <h3 class="font-heading text-lg font-bold text-[#F5F5F5] mt-1">ข้อมูลติดต่อสำนักงานใหญ่ (Head Office)</h3>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label class="block text-xs font-heading uppercase tracking-wider text-[#B8B8B8] mb-2">ชื่อสำนักงานใหญ่</label>
+                <input id="cfg_contactOfficeName" type="text" class="corp-input w-full px-4 py-2.5 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-heading uppercase tracking-wider text-[#B8B8B8] mb-2">เลขประจำตัวผู้เสียภาษี (TAX ID)</label>
+                <input id="cfg_contactTaxId" type="text" class="corp-input w-full px-4 py-2.5 text-sm" />
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs font-heading uppercase tracking-wider text-[#B8B8B8] mb-2">ที่อยู่ (ADDRESS)</label>
+              <textarea id="cfg_contactAddress" rows="2" class="corp-input w-full px-4 py-2.5 text-sm"></textarea>
+            </div>
+            <div>
+              <label class="block text-xs font-heading uppercase tracking-wider text-[#B8B8B8] mb-2">เบอร์โทรศัพท์ / LINE (TEL. / LINE)</label>
+              <input id="cfg_contactPhoneLine" type="text" class="corp-input w-full px-4 py-2.5 text-sm" />
+            </div>
+
+            <div class="pt-4">
+              <button
+                id="saveSiteConfigBtn"
+                type="submit"
+                class="btn-primary px-8 py-4 text-xs font-heading font-bold uppercase tracking-widest"
+              >
+                บันทึกเนื้อหาหน้าเว็บไซต์ทั้งหมด
+              </button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- ============================================================================
+       SUPABASE & ADMIN LOGIC
+       ============================================================================ -->
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+    import {
+      SITE_CONFIG_TAG,
+      POST_ITEM_TAG,
+      parseCatalogItem,
+      parsePostItem
+    } from './shared-data.js';
+
+    // ============================================================================
+    // ตั้งค่า SUPABASE ของคุณที่นี่
+    // วิธีนำค่ามาใส่: เข้า Supabase Dashboard -> Project Settings -> API
+    // คัดลอก Project URL และ Project API Keys (anon, public) มาวางด้านล่าง
+    // ============================================================================
+    const SUPABASE_URL = 'https://trdszzbeqbdewfwdliib.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_LP6b8aVDzAluIL5KVf8aFg_1qoNhwr1';
+    const BUCKET_NAME = 'images';
+
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    const DEFAULT_SITE_CONFIG = {
+      companyName: 'TODAY DEVELOPMENT CO., LTD.',
+      navCtaText: 'CONTACT US',
+      logoUrl: './logo.png',
+      heroBadge: 'TODAY DEVELOPMENT CO., LTD.',
+      heroTitle1: 'BUILD',
+      heroTitle2: 'WHAT’S',
+      heroTitle3: 'NEXT.',
+      heroSubtitleEn: 'Technology. Innovation. Impact.',
+      heroSubtitleTh: 'ยกระดับองค์กรด้วยระบบนิเวศเทคโนโลยีอัจฉริยะ โซลูชันอุตสาหกรรม และแคตตาล็อกผลิตภัณฑ์มาตรฐานระดับสากล',
+      heroBtnText: 'EXPLORE SOLUTIONS',
+      heroImageUrl: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1400&q=85',
+      sec1Label: '01 / WHAT WE DO',
+      sec1Title: 'OUR EXPERTISE',
+      sec1Desc: 'ผสานวิศวกรรมข้อมูล ระบบอัตโนมัติ และการออกแบบผลิตภัณฑ์ระดับพรีเมียม เพื่อสร้างความได้เปรียบทางการแข่งขันให้แก่องค์กรยุคใหม่',
+      pillar1Title: 'AI & AUTOMATION',
+      pillar1Desc: 'Intelligent systems that increase productivity and unlock new value.',
+      pillar2Title: 'INTELLIGENT PRODUCTS',
+      pillar2Desc: 'Connected, data-driven products for a smarter, more efficient world.',
+      pillar3Title: 'INDUSTRY SOLUTIONS',
+      pillar3Desc: 'Tailored technology for real business and operational impact.',
+      sec2Label: '02 / SOLUTIONS & INVENTORY',
+      sec2TitleWhite: 'FEATURED',
+      sec2TitleOrange: 'CATALOG.',
+      sec2Desc: 'คลิกที่ปุ่ม SPEC ในแต่ละการ์ดเพื่อเปิดดูหน้าใบสเปคเชิงลึก (Technical Specification Sheet)',
+      sec3Label: '04 / CORPORATE STANDARD',
+      sec3Title1: 'INNOVATION.',
+      sec3Title2: 'BEYOND LIMITS.',
+      sec3Desc: 'สถาปัตยกรรมระบบที่ออกแบบมาเพื่อความเสถียรสูงสุด รองรับการจัดการข้อมูลแบบไร้รอยต่อ พร้อมมาตรฐานความปลอดภัยระดับองค์กร (Row-Level Security) และการประมวลผลผ่านเครือข่ายคลาวด์ความเร็วสูง',
+      stat1Val: '99.9%',
+      stat1Label: 'SYSTEM RELIABILITY',
+      stat2Val: 'RLS',
+      stat2Label: 'ENTERPRISE SECURITY',
+      stat3Val: '24/7',
+      stat3Label: 'REALTIME CLOUD SYNC',
+      sec3BoxTitle: 'ENGINEERING EXCELLENCE & IMPACT',
+      sec3BoxDesc: 'มุ่งมั่นพัฒนาเทคโนโลยีและโซลูชันที่ตอบโจทย์ภาคธุรกิจและอุตสาหกรรมอย่างครบวงจร พร้อมทีมผู้เชี่ยวชาญคอยให้คำปรึกษาและดูแลระบบ',
+      contactOfficeName: 'TODAY DEVELOPMENT CO., LTD. (HEAD OFFICE)',
+      contactAddress: '11/6 Pracha Songkhro Road, Bang Nak Subdistrict, Mueang Narathiwat District, Narathiwat Province 96000, Thailand',
+      contactTaxId: '0965565000183',
+      contactPhoneLine: '094 898 6910 / 065 956 5019 / 099 265 2569',
+    };
+
+    const CONFIG_KEYS = Object.keys(DEFAULT_SITE_CONFIG);
+
+    // Elements
+    const alertBox = document.getElementById('alertBox');
+    const authSection = document.getElementById('authSection');
+    const dashboardSection = document.getElementById('dashboardSection');
+    const userControls = document.getElementById('userControls');
+    const userEmail = document.getElementById('userEmail');
+    const logoutBtn = document.getElementById('logoutBtn');
+
+    const tabCatalogBtn = document.getElementById('tabCatalogBtn');
+    const tabPostsBtn = document.getElementById('tabPostsBtn');
+    const tabSiteConfigBtn = document.getElementById('tabSiteConfigBtn');
+    const catalogPanel = document.getElementById('catalogPanel');
+    const postsPanel = document.getElementById('postsPanel');
+    const siteConfigPanel = document.getElementById('siteConfigPanel');
+
+    const siteConfigForm = document.getElementById('siteConfigForm');
+    const saveSiteConfigBtn = document.getElementById('saveSiteConfigBtn');
+    const cfgLogoFile = document.getElementById('cfg_logoFile');
+    const cfgHeroImageFile = document.getElementById('cfg_heroImageFile');
+
+    const loginForm = document.getElementById('loginForm');
+    const emailInput = document.getElementById('emailInput');
+    const passwordInput = document.getElementById('passwordInput');
+    const loginSubmitBtn = document.getElementById('loginSubmitBtn');
+
+    // Catalog Form Elements
+    const itemForm = document.getElementById('itemForm');
+    const formTitle = document.getElementById('formTitle');
+    const cancelEditBtn = document.getElementById('cancelEditBtn');
+    const itemIdInput = document.getElementById('itemId');
+    const existingImageUrlInput = document.getElementById('existingImageUrl');
+    const titleInput = document.getElementById('titleInput');
+    const priceOrTagInput = document.getElementById('priceOrTagInput');
+    const descriptionInput = document.getElementById('descriptionInput');
+    const specsInput = document.getElementById('specsInput');
+    const imageFileInput = document.getElementById('imageFileInput');
+    const currentImageHint = document.getElementById('currentImageHint');
+    const saveBtn = document.getElementById('saveBtn');
+    const adminItemsList = document.getElementById('adminItemsList');
+
+    // Posts Form Elements
+    const postForm = document.getElementById('postForm');
+    const postFormTitle = document.getElementById('postFormTitle');
+    const cancelPostEditBtn = document.getElementById('cancelPostEditBtn');
+    const postIdInput = document.getElementById('postId');
+    const existingPostImagesJson = document.getElementById('existingPostImagesJson');
+    const postTitleInput = document.getElementById('postTitleInput');
+    const postTagInput = document.getElementById('postTagInput');
+    const postContentInput = document.getElementById('postContentInput');
+    const postImagesInput = document.getElementById('postImagesInput');
+    const currentPostImagesHint = document.getElementById('currentPostImagesHint');
+    const savePostBtn = document.getElementById('savePostBtn');
+    const adminPostsList = document.getElementById('adminPostsList');
+
+    let itemsCache = [];
+    let postsCache = [];
+    let siteConfigRowId = null;
+
+    function switchTab(activeBtn, activePanel) {
+      [tabCatalogBtn, tabPostsBtn, tabSiteConfigBtn].forEach(b => b.classList.remove('active'));
+      [catalogPanel, postsPanel, siteConfigPanel].forEach(p => p.classList.add('hidden'));
+      activeBtn.classList.add('active');
+      activePanel.classList.remove('hidden');
+    }
+
+    tabCatalogBtn.addEventListener('click', () => switchTab(tabCatalogBtn, catalogPanel));
+    tabPostsBtn.addEventListener('click', () => switchTab(tabPostsBtn, postsPanel));
+    tabSiteConfigBtn.addEventListener('click', () => switchTab(tabSiteConfigBtn, siteConfigPanel));
+
+    function escapeHtml(str) {
+      const div = document.createElement('div');
+      div.textContent = str ?? '';
+      return div.innerHTML;
+    }
+
+    function showAlert(message, isError = false) {
+      alertBox.textContent = message;
+      alertBox.className = `mb-6 p-4 text-sm font-medium border ${
+        isError
+          ? 'bg-[#242424] text-[#FF4F18] border-[#FF4F18]'
+          : 'bg-[#242424] text-[#F5F5F5] border-l-4 border-l-[#FF4F18] border-[#4F4F4F]'
+      }`;
+      alertBox.classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function hideAlert() {
+      alertBox.classList.add('hidden');
+    }
+
+    // แยกชื่อไฟล์ใน Storage ออกจาก Public URL เพื่อใช้สั่งลบไฟล์ใน Bucket
+    export function extractStoragePath(publicUrl) {
+      if (!publicUrl) return null;
+      const marker = `/storage/v1/object/public/${BUCKET_NAME}/`;
+      const idx = publicUrl.indexOf(marker);
+      if (idx === -1) return null;
+      return decodeURIComponent(publicUrl.slice(idx + marker.length));
+    }
+
+    // อัปโหลดรูปภาพ 1 ไฟล์และคืนค่า Public URL
+    async function uploadImage(file) {
+      const ext = file.name.includes('.') ? file.name.split('.').pop() : 'jpg';
+      const filePath = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from(BUCKET_NAME)
+        .upload(filePath, file, { upsert: false });
+
+      if (uploadError) throw uploadError;
+
+      const { data } = supabase.storage.from(BUCKET_NAME).getPublicUrl(filePath);
+      return data.publicUrl;
+    }
+
+    // อัปโหลดหลายไฟล์พร้อมกัน (สำหรับแกลเลอรีสเปคและบทความหลายรูป)
+    async function uploadMultipleImages(fileList) {
+      const urls = [];
+      for (const file of Array.from(fileList)) {
+        const url = await uploadImage(file);
+        urls.push(url);
+      }
+      return urls;
+    }
+
+    // ลบไฟล์รูปภาพออกจาก Storage Bucket
+    async function removeImageByUrl(imageUrl) {
+      const path = extractStoragePath(imageUrl);
+      if (!path) return;
+      await supabase.storage.from(BUCKET_NAME).remove([path]);
+    }
+
+    function populateSiteConfigForm(customConfig = {}) {
+      const merged = { ...DEFAULT_SITE_CONFIG, ...customConfig };
+      CONFIG_KEYS.forEach(key => {
+        const input = document.getElementById(`cfg_${key}`);
+        if (input) input.value = merged[key] ?? '';
+      });
+    }
+
+    function updateAuthUI(session) {
+      if (session?.user) {
+        authSection.classList.add('hidden');
+        dashboardSection.classList.remove('hidden');
+        userControls.classList.remove('hidden');
+        userEmail.textContent = session.user.email;
+        fetchAdminItems();
+      } else {
+        authSection.classList.remove('hidden');
+        dashboardSection.classList.add('hidden');
+        userControls.classList.add('hidden');
+        userEmail.textContent = '';
+      }
+    }
+
+    async function fetchAdminItems() {
+      const { data, error } = await supabase
+        .from('items')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        showAlert('โหลดข้อมูลไม่สำเร็จ: ' + error.message, true);
+        return;
+      }
+
+      const rows = data || [];
+      const configRow = rows.find(r => r.price_or_tag === SITE_CONFIG_TAG);
+      if (configRow) {
+        siteConfigRowId = configRow.id;
+        try {
+          populateSiteConfigForm(JSON.parse(configRow.description || '{}'));
+        } catch (_e) {
+          populateSiteConfigForm();
+        }
+      } else {
+        siteConfigRowId = null;
+        populateSiteConfigForm();
+      }
+
+      postsCache = rows.filter(r => r.price_or_tag === POST_ITEM_TAG);
+      itemsCache = rows.filter(r => r.price_or_tag !== SITE_CONFIG_TAG && r.price_or_tag !== POST_ITEM_TAG);
+
+      renderAdminList();
+      renderAdminPostsList();
+    }
+
+    // แสดงรายการสินค้าและสเปค
+    function renderAdminList() {
+      if (itemsCache.length === 0) {
+        adminItemsList.innerHTML = '<p class="text-sm text-[#B8B8B8] py-6">ยังไม่มีรายการสินค้าในฐานข้อมูล (หน้าเว็บกำลังแสดงรายการตัวอย่าง Demo)</p>';
+        return;
+      }
+
+      adminItemsList.innerHTML = itemsCache.map(raw => {
+        const item = parseCatalogItem(raw);
+        const cover = item.gallery[0] || item.image_url;
+        const thumb = cover
+          ? `<img src="${escapeHtml(cover)}" alt="${escapeHtml(item.title)}" class="w-20 h-20 object-cover bg-[#151515] border border-[#4F4F4F] shrink-0" />`
+          : `<div class="w-20 h-20 bg-[#151515] border border-[#4F4F4F] flex items-center justify-center text-[11px] font-heading uppercase text-[#909090] shrink-0">NO IMG</div>`;
+
+        return `
+          <div class="py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-[#3A3A3A]/50 px-3 -mx-3 transition">
+            <div class="flex items-start gap-4 min-w-0">
+              ${thumb}
+              <div class="min-w-0">
+                <div class="flex items-center gap-2.5 flex-wrap">
+                  <h3 class="font-heading font-bold text-base text-[#F5F5F5] truncate">${escapeHtml(item.title)}</h3>
+                  ${item.price_or_tag ? `<span class="text-xs font-heading font-bold uppercase tracking-wider bg-[#FF4F18]/15 border border-[#FF4F18] text-[#FF4F18] px-2.5 py-0.5">${escapeHtml(item.price_or_tag)}</span>` : ''}
+                  <span class="text-[11px] font-heading text-[#909090]">(${item.specs.length} หัวข้อสเปค)</span>
+                </div>
+                <p class="text-sm text-[#B8B8B8] line-clamp-2 mt-1.5">${escapeHtml(item.summary)}</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2.5 shrink-0 self-end sm:self-center">
+              <a
+                href="./spec.html?id=${encodeURIComponent(item.id)}"
+                target="_blank"
+                class="btn-secondary px-3 py-2 text-xs font-heading font-semibold uppercase tracking-wider text-[#FF4F18]"
+              >
+                ดูหน้า SPEC &nearr;
+              </a>
+              <button
+                type="button"
+                data-action="edit"
+                data-id="${item.id}"
+                class="btn-secondary px-4 py-2 text-xs font-heading font-semibold uppercase tracking-wider"
+              >
+                แก้ไข (Edit)
+              </button>
+              <button
+                type="button"
+                data-action="delete"
+                data-id="${item.id}"
+                class="bg-[#151515] border border-[#FF4F18]/70 hover:bg-[#FF4F18] text-[#FF4F18] hover:text-white px-4 py-2 text-xs font-heading font-semibold uppercase tracking-wider transition"
+              >
+                ลบ (Delete)
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // แสดงรายการบทความ/โพสต์
+    function renderAdminPostsList() {
+      if (postsCache.length === 0) {
+        adminPostsList.innerHTML = '<p class="text-sm text-[#B8B8B8] py-6">ยังไม่มีบทความที่อัปโหลดในฐานข้อมูล (หน้าเว็บกำลังแสดงบทความตัวอย่าง Demo พร้อมสไลด์ออโต้)</p>';
+        return;
+      }
+
+      adminPostsList.innerHTML = postsCache.map(raw => {
+        const post = parsePostItem(raw);
+        const cover = post.images[0] || '';
+        const dateStr = post.created_at
+          ? new Date(post.created_at).toLocaleDateString('th-TH', { year: 'numeric', month: 'short', day: 'numeric' })
+          : '';
+        const thumb = cover
+          ? `<img src="${escapeHtml(cover)}" alt="${escapeHtml(post.title)}" class="w-24 h-16 object-cover bg-[#151515] border border-[#4F4F4F] shrink-0" />`
+          : `<div class="w-24 h-16 bg-[#151515] border border-[#4F4F4F] flex items-center justify-center text-[10px] font-heading uppercase text-[#909090] shrink-0">NO IMG</div>`;
+
+        return `
+          <div class="py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-[#3A3A3A]/50 px-3 -mx-3 transition">
+            <div class="flex items-start gap-4 min-w-0">
+              ${thumb}
+              <div class="min-w-0">
+                <div class="flex items-center gap-2.5 flex-wrap">
+                  <span class="text-[11px] font-heading font-bold uppercase tracking-wider bg-[#FF4F18] text-white px-2 py-0.5">${escapeHtml(post.tag)}</span>
+                  <span class="text-xs font-heading text-[#909090]">โพสต์เมื่อ: ${escapeHtml(dateStr)}</span>
+                  <span class="text-xs font-heading text-[#FF4F18]">(${post.images.length} รูปภาพ)</span>
+                </div>
+                <h3 class="font-heading font-bold text-base text-[#F5F5F5] truncate mt-1">${escapeHtml(post.title)}</h3>
+                <p class="text-xs text-[#B8B8B8] line-clamp-2 mt-1">${escapeHtml(post.content)}</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2.5 shrink-0 self-end sm:self-center">
+              <button
+                type="button"
+                data-post-action="edit"
+                data-id="${post.id}"
+                class="btn-secondary px-4 py-2 text-xs font-heading font-semibold uppercase tracking-wider"
+              >
+                แก้ไข (Edit)
+              </button>
+              <button
+                type="button"
+                data-post-action="delete"
+                data-id="${post.id}"
+                class="bg-[#151515] border border-[#FF4F18]/70 hover:bg-[#FF4F18] text-[#FF4F18] hover:text-white px-4 py-2 text-xs font-heading font-semibold uppercase tracking-wider transition"
+              >
+                ลบ (Delete)
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function resetForm() {
+      itemForm.reset();
+      itemIdInput.value = '';
+      existingImageUrlInput.value = '';
+      formTitle.textContent = 'เพิ่มสินค้า / โซลูชันพร้อมสเปค';
+      saveBtn.textContent = 'บันทึกข้อมูลสินค้า & สเปค';
+      cancelEditBtn.classList.add('hidden');
+      currentImageHint.classList.add('hidden');
+      currentImageHint.textContent = '';
+    }
+
+    function startEditItem(rawItem) {
+      const parsed = parseCatalogItem(rawItem);
+      itemIdInput.value = rawItem.id;
+      existingImageUrlInput.value = JSON.stringify(parsed.gallery || []);
+      titleInput.value = rawItem.title || '';
+      priceOrTagInput.value = rawItem.price_or_tag || '';
+      descriptionInput.value = parsed.summary || '';
+      specsInput.value = (parsed.specs || []).join('\n');
+      imageFileInput.value = '';
+
+      formTitle.textContent = `แก้ไขข้อมูล: ${rawItem.title}`;
+      saveBtn.textContent = 'อัปเดตข้อมูลสินค้า & สเปค';
+      cancelEditBtn.classList.remove('hidden');
+
+      if (parsed.gallery.length > 0) {
+        currentImageHint.textContent = `มีรูปภาพเดิมอยู่แล้ว ${parsed.gallery.length} รูป (หากไม่เลือกไฟล์ใหม่ ระบบจะใช้รูปภาพเดิม)`;
+        currentImageHint.classList.remove('hidden');
+      } else {
+        currentImageHint.classList.add('hidden');
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    async function deleteItem(rawItem) {
+      if (!confirm(`ยืนยันการลบ "${rawItem.title}" หรือไม่?`)) return;
+      hideAlert();
+
+      const parsed = parseCatalogItem(rawItem);
+      const { error } = await supabase.from('items').delete().eq('id', rawItem.id);
+      if (error) {
+        showAlert('ลบข้อมูลไม่สำเร็จ: ' + error.message, true);
+        return;
+      }
+
+      for (const imgUrl of parsed.gallery) {
+        await removeImageByUrl(imgUrl);
+      }
+
+      if (String(itemIdInput.value) === String(rawItem.id)) {
+        resetForm();
+      }
+
+      showAlert('ลบข้อมูลและรูปภาพเรียบร้อยแล้ว');
+      await fetchAdminItems();
+    }
+
+    // Post CRUD Helpers
+    function resetPostForm() {
+      postForm.reset();
+      postIdInput.value = '';
+      existingPostImagesJson.value = '[]';
+      postFormTitle.textContent = 'อัปโหลดบทความ / ข่าวสารใหม่ (รองรับหลายรูปสไลด์อัตโนมัติ)';
+      savePostBtn.textContent = 'โพสต์บทความขึ้นหน้าเว็บ';
+      cancelPostEditBtn.classList.add('hidden');
+      currentPostImagesHint.classList.add('hidden');
+      currentPostImagesHint.textContent = '';
+    }
+
+    function startEditPost(rawPost) {
+      const post = parsePostItem(rawPost);
+      postIdInput.value = post.id;
+      existingPostImagesJson.value = JSON.stringify(post.images || []);
+      postTitleInput.value = post.title || '';
+      postTagInput.value = post.tag || '';
+      postContentInput.value = post.content || '';
+      postImagesInput.value = '';
+
+      postFormTitle.textContent = `แก้ไขบทความ: ${post.title}`;
+      savePostBtn.textContent = 'อัปเดตบทความ';
+      cancelPostEditBtn.classList.remove('hidden');
+
+      if (post.images.length > 0) {
+        currentPostImagesHint.textContent = `มีรูปภาพในโพสต์นี้ ${post.images.length} รูป (หากเลือกไฟล์ใหม่ ระบบจะแทนที่ด้วยชุดรูปใหม่)`;
+        currentPostImagesHint.classList.remove('hidden');
+      } else {
+        currentPostImagesHint.classList.add('hidden');
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    async function deletePost(rawPost) {
+      const post = parsePostItem(rawPost);
+      if (!confirm(`ยืนยันการลบบทความ "${post.title}" หรือไม่?`)) return;
+      hideAlert();
+
+      const { error } = await supabase.from('items').delete().eq('id', post.id);
+      if (error) {
+        showAlert('ลบบทความไม่สำเร็จ: ' + error.message, true);
+        return;
+      }
+
+      for (const imgUrl of post.images) {
+        await removeImageByUrl(imgUrl);
+      }
+
+      if (String(postIdInput.value) === String(post.id)) {
+        resetPostForm();
+      }
+
+      showAlert('ลบบทความและรูปภาพใน Storage เรียบร้อยแล้ว');
+      await fetchAdminItems();
+    }
+
+    // Event: Login
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      hideAlert();
+      loginSubmitBtn.disabled = true;
+      loginSubmitBtn.textContent = 'กำลังเข้าสู่ระบบ...';
+
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: emailInput.value.trim(),
+        password: passwordInput.value,
+      });
+
+      loginSubmitBtn.disabled = false;
+      loginSubmitBtn.textContent = 'เข้าสู่ระบบ \u2192';
+
+      if (error) {
+        showAlert('เข้าสู่ระบบไม่สำเร็จ: ' + error.message, true);
+        return;
+      }
+
+      loginForm.reset();
+      updateAuthUI(data.session);
+    });
+
+    // Event: Logout
+    logoutBtn.addEventListener('click', async () => {
+      hideAlert();
+      await supabase.auth.signOut();
+      resetForm();
+      resetPostForm();
+      updateAuthUI(null);
+    });
+
+    cancelEditBtn.addEventListener('click', resetForm);
+    cancelPostEditBtn.addEventListener('click', resetPostForm);
+
+    // Event: Create / Update Catalog Item + Technical Specs
+    itemForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      hideAlert();
+
+      const editingId = itemIdInput.value;
+      const files = imageFileInput.files;
+      let gallery = [];
+      try {
+        gallery = JSON.parse(existingImageUrlInput.value || '[]');
+        if (!Array.isArray(gallery)) gallery = existingImageUrlInput.value ? [existingImageUrlInput.value] : [];
+      } catch (_e) {
+        gallery = existingImageUrlInput.value ? [existingImageUrlInput.value] : [];
+      }
+
+      saveBtn.disabled = true;
+      saveBtn.textContent = 'กำลังบันทึก...';
+
+      try {
+        if (files && files.length > 0) {
+          const uploadedUrls = await uploadMultipleImages(files);
+          if (editingId && gallery.length > 0) {
+            for (const oldUrl of gallery) {
+              await removeImageByUrl(oldUrl);
+            }
+          }
+          gallery = uploadedUrls;
+        }
+
+        const specsLines = specsInput.value
+          .split('\n')
+          .map(l => l.trim())
+          .filter(Boolean);
+
+        const structuredDesc = JSON.stringify({
+          summary: descriptionInput.value.trim(),
+          specs: specsLines,
+          gallery
+        });
+
+        const payload = {
+          title: titleInput.value.trim(),
+          price_or_tag: priceOrTagInput.value.trim(),
+          description: structuredDesc,
+          image_url: gallery[0] || '',
+        };
+
+        if (editingId) {
+          const { error } = await supabase.from('items').update(payload).eq('id', editingId);
+          if (error) throw error;
+          showAlert('อัปเดตข้อมูลสินค้าและสเปคเรียบร้อยแล้ว');
+        } else {
+          const { error } = await supabase.from('items').insert([payload]);
+          if (error) throw error;
+          showAlert('เพิ่มสินค้าและสเปคใหม่เรียบร้อยแล้ว');
+        }
+
+        resetForm();
+        await fetchAdminItems();
+      } catch (err) {
+        showAlert('เกิดข้อผิดพลาด: ' + (err.message || err), true);
+      } finally {
+        saveBtn.disabled = false;
+        saveBtn.textContent = itemIdInput.value ? 'อัปเดตข้อมูลสินค้า & สเปค' : 'บันทึกข้อมูลสินค้า & สเปค';
+      }
+    });
+
+    // Event: Create / Update Article Post (Multi-Image)
+    postForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      hideAlert();
+
+      const editingPostId = postIdInput.value;
+      const files = postImagesInput.files;
+      let postImages = [];
+      try {
+        postImages = JSON.parse(existingPostImagesJson.value || '[]');
+      } catch (_e) {
+        postImages = [];
+      }
+
+      savePostBtn.disabled = true;
+      savePostBtn.textContent = 'กำลังอัปโหลดรูปและโพสต์บทความ...';
+
+      try {
+        if (files && files.length > 0) {
+          const uploadedUrls = await uploadMultipleImages(files);
+          if (editingPostId && postImages.length > 0) {
+            for (const oldUrl of postImages) {
+              await removeImageByUrl(oldUrl);
+            }
+          }
+          postImages = uploadedUrls;
+        }
+
+        const postDataJson = JSON.stringify({
+          tag: postTagInput.value.trim() || 'CORPORATE UPDATE',
+          content: postContentInput.value.trim(),
+          images: postImages,
+          customDate: new Date().toISOString()
+        });
+
+        const payload = {
+          title: postTitleInput.value.trim(),
+          price_or_tag: POST_ITEM_TAG,
+          description: postDataJson,
+          image_url: postImages[0] || '',
+        };
+
+        if (editingPostId) {
+          const { error } = await supabase.from('items').update(payload).eq('id', editingPostId);
+          if (error) throw error;
+          showAlert('อัปเดตบทความเรียบร้อยแล้ว');
+        } else {
+          const { error } = await supabase.from('items').insert([payload]);
+          if (error) throw error;
+          showAlert('โพสต์บทความใหม่ขึ้นหน้าเว็บเรียบร้อยแล้ว');
+        }
+
+        resetPostForm();
+        await fetchAdminItems();
+      } catch (err) {
+        showAlert('โพสต์บทความไม่สำเร็จ: ' + (err.message || err), true);
+      } finally {
+        savePostBtn.disabled = false;
+        savePostBtn.textContent = postIdInput.value ? 'อัปเดตบทความ' : 'โพสต์บทความขึ้นหน้าเว็บ';
+      }
+    });
+
+    // Event: Save Full Frontend Site Configuration
+    siteConfigForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      hideAlert();
+
+      saveSiteConfigBtn.disabled = true;
+      saveSiteConfigBtn.textContent = 'กำลังบันทึกเนื้อหาหน้าเว็บ...';
+
+      try {
+        const configObj = {};
+        CONFIG_KEYS.forEach(key => {
+          const input = document.getElementById(`cfg_${key}`);
+          configObj[key] = input ? input.value.trim() : DEFAULT_SITE_CONFIG[key];
+        });
+
+        if (cfgLogoFile.files[0]) {
+          const newLogoUrl = await uploadImage(cfgLogoFile.files[0]);
+          configObj.logoUrl = newLogoUrl;
+          cfgLogoFile.value = '';
+        }
+
+        if (cfgHeroImageFile.files[0]) {
+          const newHeroUrl = await uploadImage(cfgHeroImageFile.files[0]);
+          configObj.heroImageUrl = newHeroUrl;
+          cfgHeroImageFile.value = '';
+        }
+
+        const payload = {
+          title: SITE_CONFIG_TAG,
+          price_or_tag: SITE_CONFIG_TAG,
+          description: JSON.stringify(configObj),
+          image_url: configObj.heroImageUrl || '',
+        };
+
+        if (siteConfigRowId) {
+          const { error } = await supabase.from('items').update(payload).eq('id', siteConfigRowId);
+          if (error) throw error;
+        } else {
+          const { data, error } = await supabase.from('items').insert([payload]).select().single();
+          if (error) throw error;
+          if (data?.id) siteConfigRowId = data.id;
+        }
+
+        showAlert('บันทึกการตั้งค่าเนื้อหาหน้าบ้านทั้งหมดเรียบร้อยแล้ว');
+        await fetchAdminItems();
+      } catch (err) {
+        showAlert('บันทึกการตั้งค่าไม่สำเร็จ: ' + (err.message || err), true);
+      } finally {
+        saveSiteConfigBtn.disabled = false;
+        saveSiteConfigBtn.textContent = 'บันทึกเนื้อหาหน้าเว็บไซต์ทั้งหมด';
+      }
+    });
+
+    // Event Delegation สำหรับปุ่ม Edit และ Delete ของสินค้า
+    adminItemsList.addEventListener('click', (e) => {
+      const btn = e.target.closest('button[data-action]');
+      if (!btn) return;
+      const id = btn.getAttribute('data-id');
+      const item = itemsCache.find(i => String(i.id) === String(id));
+      if (!item) return;
+
+      if (btn.getAttribute('data-action') === 'edit') {
+        startEditItem(item);
+      } else if (btn.getAttribute('data-action') === 'delete') {
+        deleteItem(item);
+      }
+    });
+
+    // Event Delegation สำหรับปุ่ม Edit และ Delete ของบทความ
+    adminPostsList.addEventListener('click', (e) => {
+      const btn = e.target.closest('button[data-post-action]');
+      if (!btn) return;
+      const id = btn.getAttribute('data-id');
+      const post = postsCache.find(p => String(p.id) === String(id));
+      if (!post) return;
+
+      if (btn.getAttribute('data-post-action') === 'edit') {
+        startEditPost(post);
+      } else if (btn.getAttribute('data-post-action') === 'delete') {
+        deletePost(post);
+      }
+    });
+
+    // ตรวจสอบสถานะการล็อกอินเมื่อเปิดหน้าเว็บ
+    const { data: { session } } = await supabase.auth.getSession();
+    updateAuthUI(session);
+
+    supabase.auth.onAuthStateChange((_event, currentSession) => {
+      updateAuthUI(currentSession);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TECHNICAL SPECIFICATION | TODAY DEVELOPMENT CO., LTD.</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Kanit:wght@500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --brand-primary: #4F4F4F;
+      --brand-accent: #FF4F18;
+      --bg-primary: #151515;
+      --bg-secondary: #242424;
+      --bg-card: #303030;
+      --bg-elevated: #3A3A3A;
+      --text-primary: #F5F5F5;
+      --text-secondary: #B8B8B8;
+      --text-muted: #909090;
+      --border-primary: #4F4F4F;
+      --accent-hover: #FF7043;
+      --accent-glow: rgba(255, 79, 24, 0.18);
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: 'Inter', 'IBM Plex Sans Thai', sans-serif;
+      overflow-x: hidden;
+    }
+
+    .font-display {
+      font-family: 'Bebas Neue', 'Space Grotesk', 'Kanit', sans-serif;
+    }
+
+    .font-heading {
+      font-family: 'Space Grotesk', 'Kanit', sans-serif;
+    }
+
+    /* Smooth Smoked-Titanium Logo Badge (ไม่ขาวจ้า เนียนตากับธีมมืด) */
+    .logo-plinth {
+      background: linear-gradient(135deg, rgba(190, 192, 198, 0.86) 0%, rgba(152, 155, 162, 0.78) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-left: 3px solid var(--brand-accent);
+      border-radius: 4px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(8px);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+
+    .logo-plinth:hover {
+      transform: translateY(-1px);
+      border-color: var(--brand-accent);
+      box-shadow: 0 8px 24px rgba(255, 79, 24, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    }
+
+    .spec-hero-surface {
+      background:
+        radial-gradient(circle at 80% 25%, rgba(255, 79, 24, 0.15), transparent 45%),
+        radial-gradient(circle at 15% 75%, rgba(79, 79, 79, 0.2), transparent 50%),
+        linear-gradient(180deg, #151515 0%, #1C1C1C 100%);
+    }
+
+    .tech-grid-bg {
+      background-size: 48px 48px;
+      background-image:
+        linear-gradient(to right, rgba(79, 79, 79, 0.14) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(79, 79, 79, 0.14) 1px, transparent 1px);
+    }
+
+    .corp-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-primary);
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .corp-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--brand-accent);
+      box-shadow: 0 14px 30px -10px var(--accent-glow);
+    }
+
+    .btn-primary {
+      background-color: var(--brand-accent);
+      color: #FFFFFF;
+      transition: background-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--accent-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px var(--accent-glow);
+    }
+
+    .btn-secondary {
+      background-color: rgba(36, 36, 36, 0.9);
+      border: 1px solid var(--border-primary);
+      color: var(--text-primary);
+      transition: border-color 0.25s ease, color 0.25s ease, background-color 0.25s ease;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--brand-accent);
+      color: #FFFFFF;
+      background-color: var(--bg-card);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-[#FF4F18] selection:text-white">
+
+  <!-- ============================================================================
+       NAVIGATION BAR
+       ============================================================================ -->
+  <header class="sticky top-0 z-50 bg-[#151515]/95 backdrop-blur-md border-b border-[#4F4F4F]/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-24 flex items-center justify-between gap-4">
+      <a href="./index.html" class="flex items-center gap-3.5 focus:outline-none">
+        <div class="logo-plinth px-3.5 py-2 flex items-center justify-center">
+          <img
+            src="./logo.png"
+            alt="TODAY DEVELOPMENT CO., LTD."
+            class="h-8 sm:h-10 w-auto object-contain block"
+          />
+        </div>
+        <div class="hidden sm:block">
+          <span class="font-heading font-bold text-sm tracking-wider text-[#F5F5F5] block uppercase">
+            TODAY DEVELOPMENT CO., LTD.
+          </span>
+          <span class="text-[11px] font-heading tracking-widest text-[#FF4F18] uppercase block">
+            TECHNICAL SPECIFICATION PORTAL
+          </span>
+        </div>
+      </a>
+
+      <div class="flex items-center gap-3">
+        <a
+          href="./index.html#catalog"
+          class="btn-secondary px-4 sm:px-5 py-2.5 text-xs font-heading font-bold uppercase tracking-wider inline-flex items-center gap-2"
+        >
+          <span>&larr; กลับไปหน้า CATALOG</span>
+        </a>
+        <a
+          href="./index.html#contact"
+          class="hidden sm:inline-flex btn-primary px-5 py-2.5 text-xs font-heading font-bold uppercase tracking-wider items-center gap-2"
+        >
+          <span>CONTACT US</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================================
+       PROMINENT SPECIFICATION HERO SHOWCASE
+       ============================================================================ -->
+  <main class="flex-1">
+    <section class="spec-hero-surface tech-grid-bg border-b border-[#4F4F4F] py-10 lg:py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- Loading / Error Status -->
+        <div id="specStatus" class="p-12 bg-[#242424] border border-[#4F4F4F] text-center text-[#B8B8B8] font-heading">
+          กำลังโหลดข้อมูลสเปคเชิงลึก...
+        </div>
+
+        <!-- Prominent Spec Container -->
+        <div id="specContent" class="hidden space-y-10">
+
+          <!-- Top Title Banner -->
+          <div class="bg-[#242424]/90 border border-[#4F4F4F] border-l-4 border-l-[#FF4F18] p-6 sm:p-8 flex flex-col lg:flex-row lg:items-center justify-between gap-6 shadow-2xl">
+            <div class="space-y-3">
+              <div class="flex flex-wrap items-center gap-3">
+                <span class="bg-[#FF4F18] text-white text-xs font-heading font-bold px-3 py-1 uppercase tracking-widest">
+                  OFFICIAL SPEC SHEET
+                </span>
+                <span id="specTagBadge" class="bg-[#FF4F18]/15 border border-[#FF4F18] text-[#FF4F18] text-xs font-heading font-bold px-3 py-1 uppercase tracking-wider"></span>
+                <span id="specDateBadge" class="text-xs font-heading uppercase tracking-wider text-[#909090]"></span>
+              </div>
+              <h1 id="specTitle" class="font-display text-4xl sm:text-5xl lg:text-6xl uppercase tracking-wide text-[#F5F5F5] leading-none"></h1>
+            </div>
+            <div class="flex flex-wrap items-center gap-3 shrink-0">
+              <button
+                type="button"
+                onclick="window.print()"
+                class="btn-secondary px-5 py-3 text-xs font-heading font-bold uppercase tracking-wider"
+              >
+                พิมพ์ใบสเปค (PRINT)
+              </button>
+              <a
+                href="./index.html#contact"
+                class="btn-primary px-6 py-3 text-xs font-heading font-bold uppercase tracking-widest inline-flex items-center gap-2"
+              >
+                <span>สอบถามสเปคนี้</span>
+                <span>&rarr;</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- 2-Column Visual + Full Technical Specification Table -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+            <!-- Left Column: High-Impact Visual Gallery -->
+            <div class="lg:col-span-6 space-y-4">
+              <div class="relative bg-[#242424] border border-[#4F4F4F] p-2 sm:p-3 shadow-2xl">
+                <div class="absolute -top-1 -left-1 w-4 h-4 border-t-2 border-l-2 border-[#FF4F18] z-20"></div>
+                <div class="absolute -bottom-1 -right-1 w-4 h-4 border-b-2 border-r-2 border-[#FF4F18] z-20"></div>
+
+                <div class="relative aspect-[16/11] bg-[#151515] overflow-hidden">
+                  <img
+                    id="specMainImage"
+                    src=""
+                    alt="Specification Visual"
+                    class="w-full h-full object-cover transition-all duration-500"
+                  />
+                  <!-- Prev / Next buttons for Gallery -->
+                  <button
+                    id="specPrevImgBtn"
+                    type="button"
+                    aria-label="รูปก่อนหน้า"
+                    class="hidden absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-[#151515]/85 border border-[#4F4F4F] hover:border-[#FF4F18] text-white flex items-center justify-center transition"
+                  >
+                    &larr;
+                  </button>
+                  <button
+                    id="specNextImgBtn"
+                    type="button"
+                    aria-label="รูปถัดไป"
+                    class="hidden absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-[#151515]/85 border border-[#4F4F4F] hover:border-[#FF4F18] text-white flex items-center justify-center transition"
+                  >
+                    &rarr;
+                  </button>
+                  <div id="specImgCounter" class="hidden absolute bottom-3 right-3 bg-[#151515]/90 border border-[#4F4F4F] px-3 py-1 text-xs font-heading font-bold text-[#FF4F18]"></div>
+                </div>
+              </div>
+
+              <!-- Thumbnails Strip -->
+              <div id="specThumbnails" class="grid grid-cols-4 sm:grid-cols-5 gap-3"></div>
+
+              <!-- Executive Summary Card -->
+              <div class="bg-[#242424] border border-[#4F4F4F] p-6 space-y-2">
+                <div class="text-xs font-heading font-bold uppercase tracking-widest text-[#FF4F18]">
+                  OVERVIEW &amp; DESCRIPTION
+                </div>
+                <p id="specSummary" class="text-sm sm:text-base text-[#F5F5F5] leading-relaxed whitespace-pre-line"></p>
+              </div>
+            </div>
+
+            <!-- Right Column: Prominent Technical Specifications Table -->
+            <div class="lg:col-span-6 bg-[#242424] border-2 border-[#FF4F18] shadow-[0_0_40px_rgba(255,79,24,0.14)]">
+              <div class="bg-[#303030] border-b border-[#4F4F4F] px-6 py-5 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <span class="w-3 h-3 bg-[#FF4F18]"></span>
+                  <h2 class="font-heading font-bold text-lg sm:text-xl uppercase tracking-wider text-[#F5F5F5]">
+                    TECHNICAL SPECIFICATIONS (สเปคโดยละเอียด)
+                  </h2>
+                </div>
+                <span class="text-xs font-heading uppercase tracking-widest text-[#FF4F18] font-bold">VERIFIED</span>
+              </div>
+
+              <!-- Spec Table Rows -->
+              <div id="specTableBody" class="divide-y divide-[#4F4F4F]/70 p-6 space-y-0"></div>
+
+              <!-- Direct Contact Box inside Spec Sheet -->
+              <div class="bg-[#151515] border-t border-[#4F4F4F] p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                  <div class="text-xs font-heading uppercase tracking-wider text-[#FF4F18] font-bold">TODAY DEVELOPMENT CO., LTD.</div>
+                  <div class="text-sm text-[#B8B8B8] mt-0.5">Tel. / LINE: <span class="text-[#F5F5F5] font-semibold">094 898 6910 / 065 956 5019 / 099 265 2569</span></div>
+                </div>
+                <a
+                  href="./index.html#contact"
+                  class="btn-primary px-5 py-2.5 text-xs font-heading font-bold uppercase tracking-wider text-center shrink-0"
+                >
+                  ติดต่อฝ่ายวิศวกรรม &rarr;
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Other Catalog Items Section -->
+    <section class="bg-[#151515] py-14 border-b border-[#4F4F4F]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        <div class="flex items-center justify-between">
+          <div>
+            <span class="text-xs font-heading font-bold uppercase tracking-widest text-[#FF4F18]">MORE SOLUTIONS</span>
+            <h2 class="font-display text-3xl sm:text-4xl uppercase text-[#F5F5F5] mt-1">รายการสเปคอื่นๆ ในระบบ</h2>
+          </div>
+          <a href="./index.html#catalog" class="text-xs font-heading font-bold uppercase tracking-wider text-[#FF4F18] hover:underline">
+            ดูทั้งหมด &rarr;
+          </a>
+        </div>
+        <div id="relatedSpecsGrid" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-[#151515] text-[#909090] py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-heading uppercase tracking-wider">
+      <div>&copy; 2026 TODAY DEVELOPMENT CO., LTD. ALL RIGHTS RESERVED.</div>
+      <div class="flex items-center gap-6">
+        <a href="./index.html" class="hover:text-[#FF4F18] transition">HOME</a>
+        <a href="./index.html#catalog" class="hover:text-[#FF4F18] transition">CATALOG</a>
+        <a href="./admin.html" class="text-[#F5F5F5] hover:text-[#FF4F18] transition">ADMIN CONSOLE</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+    import {
+      SITE_CONFIG_TAG,
+      POST_ITEM_TAG,
+      DEMO_CATALOG_ITEMS,
+      parseCatalogItem
+    } from './shared-data.js';
+
+    // ============================================================================
+    // ตั้งค่า SUPABASE ของคุณที่นี่
+    // ============================================================================
+    const SUPABASE_URL = 'https://trdszzbeqbdewfwdliib.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_LP6b8aVDzAluIL5KVf8aFg_1qoNhwr1';
+
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    const specStatus = document.getElementById('specStatus');
+    const specContent = document.getElementById('specContent');
+    const specTagBadge = document.getElementById('specTagBadge');
+    const specDateBadge = document.getElementById('specDateBadge');
+    const specTitle = document.getElementById('specTitle');
+    const specMainImage = document.getElementById('specMainImage');
+    const specPrevImgBtn = document.getElementById('specPrevImgBtn');
+    const specNextImgBtn = document.getElementById('specNextImgBtn');
+    const specImgCounter = document.getElementById('specImgCounter');
+    const specThumbnails = document.getElementById('specThumbnails');
+    const specSummary = document.getElementById('specSummary');
+    const specTableBody = document.getElementById('specTableBody');
+    const relatedSpecsGrid = document.getElementById('relatedSpecsGrid');
+
+    function escapeHtml(str) {
+      const div = document.createElement('div');
+      div.textContent = str ?? '';
+      return div.innerHTML;
+    }
+
+    let galleryImages = [];
+    let currentImgIdx = 0;
+
+    function updateGalleryView(idx) {
+      if (!galleryImages.length) return;
+      currentImgIdx = (idx + galleryImages.length) % galleryImages.length;
+      specMainImage.src = galleryImages[currentImgIdx];
+      if (galleryImages.length > 1) {
+        specImgCounter.textContent = `${currentImgIdx + 1} / ${galleryImages.length}`;
+        specImgCounter.classList.remove('hidden');
+        specPrevImgBtn.classList.remove('hidden');
+        specNextImgBtn.classList.remove('hidden');
+      } else {
+        specImgCounter.classList.add('hidden');
+        specPrevImgBtn.classList.add('hidden');
+        specNextImgBtn.classList.add('hidden');
+      }
+
+      specThumbnails.querySelectorAll('button').forEach((btn, i) => {
+        if (i === currentImgIdx) {
+          btn.className = 'aspect-[16/10] bg-[#151515] border-2 border-[#FF4F18] overflow-hidden transition';
+        } else {
+          btn.className = 'aspect-[16/10] bg-[#151515] border border-[#4F4F4F] opacity-60 hover:opacity-100 overflow-hidden transition';
+        }
+      });
+    }
+
+    specPrevImgBtn.addEventListener('click', () => updateGalleryView(currentImgIdx - 1));
+    specNextImgBtn.addEventListener('click', () => updateGalleryView(currentImgIdx + 1));
+
+    function renderSpecPage(rawItem, allCatalogItems) {
+      const item = parseCatalogItem(rawItem);
+      document.title = `${item.title} | TECHNICAL SPECIFICATION`;
+
+      specStatus.classList.add('hidden');
+      specContent.classList.remove('hidden');
+
+      specTitle.textContent = item.title;
+      specTagBadge.textContent = item.price_or_tag || 'STANDARD SOLUTION';
+      specDateBadge.textContent = item.created_at
+        ? 'UPDATED: ' + new Date(item.created_at).toLocaleDateString('th-TH', { year: 'numeric', month: 'short', day: 'numeric' })
+        : '';
+      specSummary.textContent = item.summary || '-';
+
+      galleryImages = item.gallery.length > 0
+        ? item.gallery
+        : ['https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=85'];
+
+      if (galleryImages.length > 1) {
+        specThumbnails.innerHTML = galleryImages.map((imgUrl, idx) => `
+          <button type="button" data-idx="${idx}">
+            <img src="${escapeHtml(imgUrl)}" alt="Thumbnail ${idx + 1}" class="w-full h-full object-cover" />
+          </button>
+        `).join('');
+        specThumbnails.querySelectorAll('button').forEach(btn => {
+          btn.addEventListener('click', () => updateGalleryView(Number(btn.dataset.idx)));
+        });
+      } else {
+        specThumbnails.innerHTML = '';
+      }
+      updateGalleryView(0);
+
+      // Render Prominent Specification Rows
+      specTableBody.innerHTML = item.specs.map((line, i) => {
+        const colonIdx = line.indexOf(':');
+        if (colonIdx !== -1) {
+          const key = line.slice(0, colonIdx).trim();
+          const val = line.slice(colonIdx + 1).trim();
+          return `
+            <div class="py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div class="flex items-center gap-2.5 text-xs sm:text-sm font-heading font-bold uppercase tracking-wider text-[#B8B8B8]">
+                <span class="w-1.5 h-1.5 bg-[#FF4F18] shrink-0"></span>
+                <span>${escapeHtml(key)}</span>
+              </div>
+              <div class="text-sm sm:text-base font-medium text-[#F5F5F5] sm:text-right pl-4 sm:pl-0">
+                ${escapeHtml(val)}
+              </div>
+            </div>
+          `;
+        }
+        return `
+          <div class="py-4 flex items-start gap-3">
+            <span class="text-xs font-heading font-bold text-[#FF4F18] mt-0.5">0${i + 1}</span>
+            <span class="text-sm sm:text-base text-[#F5F5F5]">${escapeHtml(line)}</span>
+          </div>
+        `;
+      }).join('');
+
+      // Render Other Related Specs
+      const others = allCatalogItems.filter(x => String(x.id) !== String(item.id)).slice(0, 3);
+      relatedSpecsGrid.innerHTML = others.map(otherRaw => {
+        const other = parseCatalogItem(otherRaw);
+        const img = other.gallery[0] || '';
+        return `
+          <a href="./spec.html?id=${encodeURIComponent(other.id)}" class="corp-card group block overflow-hidden">
+            <div class="h-44 bg-[#151515] border-b border-[#4F4F4F] overflow-hidden">
+              ${img ? `<img src="${escapeHtml(img)}" alt="${escapeHtml(other.title)}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" />` : ''}
+            </div>
+            <div class="p-5 space-y-2">
+              <div class="text-[11px] font-heading font-bold uppercase tracking-wider text-[#FF4F18]">${escapeHtml(other.price_or_tag || 'SPECIFICATION')}</div>
+              <h3 class="font-heading font-bold text-base text-[#F5F5F5] group-hover:text-[#FF4F18] transition truncate">${escapeHtml(other.title)}</h3>
+              <p class="text-xs text-[#B8B8B8] line-clamp-2">${escapeHtml(other.summary)}</p>
+              <div class="pt-2 text-xs font-heading font-bold text-[#F5F5F5] group-hover:text-[#FF4F18] inline-flex items-center gap-1">
+                <span>VIEW FULL SPEC</span>
+                <span>&rarr;</span>
+              </div>
+            </div>
+          </a>
+        `;
+      }).join('');
+    }
+
+    async function initSpecPage() {
+      const params = new URLSearchParams(window.location.search);
+      const targetId = params.get('id');
+
+      const { data } = await supabase
+        .from('items')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      const dbCatalog = (data || []).filter(
+        r => r.price_or_tag !== SITE_CONFIG_TAG && r.price_or_tag !== POST_ITEM_TAG
+      );
+
+      const combinedCatalog = [...dbCatalog, ...DEMO_CATALOG_ITEMS];
+      const found = combinedCatalog.find(i => String(i.id) === String(targetId)) || combinedCatalog[0];
+
+      if (!found) {
+        specStatus.textContent = 'ไม่พบรายการสเปคที่ระบุ';
+        return;
+      }
+
+      renderSpecPage(found, combinedCatalog);
+    }
+
+    initSpecPage();
+  </script>
+</body>
+</html>
